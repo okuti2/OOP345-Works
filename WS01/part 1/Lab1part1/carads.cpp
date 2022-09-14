@@ -65,14 +65,14 @@ namespace sdds
 
 		if (m_brandOfCar[0] != '\0') {
 			cout << left << setw(2) << Counter << ". ";
-			cout << left << setw(10) << this->m_brandOfCar << "|";
-			cout << left << setw(15) << this->m_modelOfCar << "|";
-			cout << m_manYear<<"|";
+			cout << left << setw(10) << this->m_brandOfCar << "| ";
+			cout << left << setw(15) << this->m_modelOfCar << "| ";
+			cout << m_manYear<<" |";
 			
 			double priceTax = (this->m_priceOfCar) * (g_taxrate + 1);
 			double specialPrice = priceTax - (priceTax* g_discount);
 
-			cout << left << setw(12) << setprecision(2) << fixed << priceTax<<"|";
+			cout << right << setw(12) << setprecision(2) << fixed << priceTax<<"|";
 			if (m_promDiscount) {
 				cout << right << setw(12) << setprecision(2) << fixed << specialPrice << endl;
 			}
