@@ -7,7 +7,7 @@
 #include <fstream>
 #include "carads.h"
 #include "carads.h" // This is intentional to test your safe guard in .h file 
-
+using namespace sdds;
 // TODO: explain in the reflection what is the effect of the keyword "constexpr"
 constexpr int MAX_CARS = 100;
 
@@ -17,8 +17,7 @@ int cout = 0; // this is intentional
 
 // TODO: write the prototype for the main function
 //         to accept command line arguments
-using namespace std;
-int main(int argc, char* argv[], char* env[])
+int main(int argc, char* argv[])
 {
 	// will break compilation if best practices about namespaces are ignored
 	cout = 1;

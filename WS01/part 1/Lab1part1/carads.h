@@ -10,12 +10,14 @@ Date    12th September, 2022
 -----------------------------------------------------------*/
 #ifndef SDDS_CARADS_H
 #define SDDS_CARADS_H
+
+extern double g_taxrate;
+extern double g_discount;
 namespace sdds
 {
-	extern double g_taxrate;
-	extern double g_discount;
+	
 
-	void listArgs(int argc, char* argv[], char* env[]);
+	void listArgs(int argc, char* argv[]);
 
 	class Cars
 	{
@@ -33,6 +35,6 @@ namespace sdds
 		
 	};
 
-
+	
 }
 #endif //! SDDS_CARADS_H
