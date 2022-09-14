@@ -70,7 +70,7 @@ namespace sdds
 			cout << m_manYear<<"|";
 			
 			double priceTax = (this->m_priceOfCar) * (g_taxrate + 1);
-			double specialPrice = priceTax - g_discount;
+			double specialPrice = priceTax - (priceTax* g_discount);
 
 			cout << left << setw(12) << setprecision(2) << fixed << priceTax<<"|";
 			if (m_promDiscount) {
