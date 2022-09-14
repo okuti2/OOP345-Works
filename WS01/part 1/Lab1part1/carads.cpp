@@ -80,6 +80,8 @@ namespace sdds
 		else {
 			cout <<setw(2)<< Counter << ". " << "No Car" << endl;
 		}
+
+		if (reset) Counter = 0;
 	}
 
 	char Cars::getStatus()const{
