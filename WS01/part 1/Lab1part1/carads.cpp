@@ -23,4 +23,31 @@ namespace sdds
 		cout << "3: " << env << endl;
 		cout << "4: ..." << endl;
 	}
+
+	Cars::Cars() {
+		m_brandOfCar[0] = '\0';
+		m_modelOfCar[0] = '\0';
+		m_manYear = 0;
+		m_priceOfCar = 0.0;
+		m_statusOfCar = '\0';
+		m_promDiscount = false;
+	}
+
+	void Cars::read(std::istream& is){
+
+	}
+	
+	void Cars::display(bool reset)const{
+
+	}
+
+	char Cars::getStatus()const{
+		
+	}
+
+
+
+
+
+
 }

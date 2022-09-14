@@ -19,7 +19,18 @@ namespace sdds
 
 	class Cars
 	{
-
+		char m_brandOfCar[10];
+		char m_modelOfCar[15];
+		int m_manYear;
+		double m_priceOfCar;
+		char m_statusOfCar;
+		bool m_promDiscount;
+	public:
+		Cars();
+		void read(std::istream& is);
+		void display(bool reset) const;
+		char getStatus() const;
+		
 	};
 
 
