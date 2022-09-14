@@ -53,6 +53,7 @@ namespace sdds
 			is.ignore();
 			is >> p;
 			this->m_promDiscount = (p == 'Y' ? true : false);
+			is.ignore(2000, '\n');
 		}
 	}
 	
