@@ -59,6 +59,7 @@ namespace sdds
 	void Cars::display(bool reset)const{
 		static int Counter = 0;
 		Counter++;
+		if (reset) Counter = 0;
 
 		if (m_brandOfCar[0] != '\0') {
 			cout << left << setw(2) << Counter << ". ";
@@ -81,7 +82,6 @@ namespace sdds
 			cout <<setw(2)<< Counter << ". " << "No Car" << endl;
 		}
 
-		if (reset) Counter = 0;
 	}
 
 	char Cars::getStatus()const{
