@@ -29,7 +29,7 @@ namespace sdds
 		cout << "--------------------------\n"<<endl;
 	}
 
-	Cars::Cars() {
+	Cars::Cars() { // setting all members to a safe and empty state
 		m_brandOfCar[0] = '\0';
 		m_modelOfCar[0] = '\0';
 		m_manYear = 0;
@@ -41,27 +41,27 @@ namespace sdds
 	void Cars::read(std::istream& is){
 		char s{ 0 };
 		char p{ 0 };
-		if (!is.fail()) {
+		if (!is.fail()) { //ensuring the istream is in a good state before data is accepted
 			is >> s;
-			if (s == 'N' || s == 'U') this->m_statusOfCar = s;
-			is.ignore();
+			if (s == 'N' || s == 'U') this->m_statusOfCar = s; //only N or U are allowed in the member
+			is.ignore(); //extracting the ","
 			is.getline(m_brandOfCar, 10, ',');
 			is.getline(m_modelOfCar, 25, ',');
 			is >> this->m_manYear;
-			is.ignore();
+			is.ignore(); //eating the comma
 			is >> this->m_priceOfCar;
-			is.ignore();
+			is.ignore(); //eating the comma
 			is >> p;
 			this->m_promDiscount = (p == 'Y' ? true : false);
-			is.ignore(2000, '\n');
+			is.ignore(2000, '\n'); //extracts the newline character
 		}
 	}
 	
 	void Cars::display(bool reset)const{
 		static int Counter = 0;
-		if (reset) Counter = 0;
+		if (reset) Counter = 0; // if the argument passed is true we reset the counter to zero
 
-		Counter++;
+		Counter++; // we start counting from the number 1
 
 		if (m_brandOfCar[0] != '\0') {
 			cout << left << setw(2) << Counter << ". ";
@@ -69,8 +69,8 @@ namespace sdds
 			cout << left << setw(15) << this->m_modelOfCar << "| ";
 			cout << m_manYear<<" |";
 			
-			double priceTax = (this->m_priceOfCar) * (g_taxrate + 1);
-			double specialPrice = priceTax - (priceTax* g_discount);
+			double priceTax = (this->m_priceOfCar) * (g_taxrate + 1); // calculate the price tax using the tax rate
+			double specialPrice = priceTax - (priceTax* g_discount); // calculate the special price after the discount is applied 
 
 			cout << right << setw(12) << setprecision(2) << fixed << priceTax<<"|";
 			if (m_promDiscount) {
