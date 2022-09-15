@@ -17,7 +17,6 @@ using namespace std;
 double g_taxrate;
 double g_discount;
 
-
 namespace sdds
 {
 	void listArgs(int argc, char* argv[]) {
@@ -106,7 +105,6 @@ namespace sdds
 		else {
 			cout << setw(2) << Counter << ". " << "No Car" << endl;
 		}
-
 	}
 
 	char Cars::getStatus()const {
@@ -138,8 +136,4 @@ namespace sdds
 	void operator>>(const Cars& car1, Cars& car2) {
 		car2 = car1;
 	}
-
-
-
-
 }

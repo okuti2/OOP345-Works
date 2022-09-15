@@ -15,11 +15,8 @@ extern double g_taxrate; // taxrate, global variable
 extern double g_discount; // dicsount global variable
 namespace sdds
 {
-
-
 	void listArgs(int argc, char* argv[]); // lists out the arguments put into the program from the command line
 	void alocpy(char*& destination, const char* source);
-
 
 	class Cars
 	{
@@ -39,12 +36,9 @@ namespace sdds
 		Cars(const Cars& cars); // copy constructor
 		Cars& operator=(const Cars& cars); // assignment operator
 		virtual ~Cars(); // destructor, not sure if it should be virtual or not
-
 		operator bool() const; // returns true if the car is new
 	};
 	std::istream& operator>>(std::istream& is, Cars& car);
 	void operator>>(const Cars& car1, Cars& car2);
-
-
 }
 #endif //! SDDS_CARADS_H

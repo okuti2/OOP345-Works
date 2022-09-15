@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	sdds::listArgs(argc,argv); 
 
 	// Read all ads and record them
-	sdds::Cars recordedCarsOnAds[MAX_CARS];
+		sdds::Cars recordedCarsOnAds[MAX_CARS];
 
 	// Keep a count of how many new cars and all cars read
 	size_t newCars = 0, allCars=0;
