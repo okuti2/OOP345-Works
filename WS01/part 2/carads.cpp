@@ -12,7 +12,9 @@ Date    14th September, 2022
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <string>
 #include "carads.h"
+
 using namespace std;
 double g_taxrate;
 double g_discount;
@@ -46,17 +48,19 @@ namespace sdds
 	{
 		if (this != &cars) {
 			if (cars.m_brandOfCar!= nullptr) {
-				alocpy(m_brandOfCar, cars.m_brandOfCar); // re used this function from my milestone 5 in OOP244
-				/*m_brandOfCar = new char[strlen(cars.m_brandOfCar) + 1];
-				strcpy(m_brandOfCar, cars.m_brandOfCar);*/
+				//alocpy(m_brandOfCar, cars.m_brandOfCar); // re used this function from my milestone 5 in OOP244
+				m_brandOfCar = new char[strlen(cars.m_brandOfCar) + 1];
+				strcpy(m_brandOfCar, cars.m_brandOfCar);
 				strncpy(m_modelOfCar, cars.m_modelOfCar, 15);
 				m_manYear = cars.m_manYear;
 				m_priceOfCar = cars.m_priceOfCar;
+				m_statusOfCar = cars.m_statusOfCar;
 				m_promDiscount = cars.m_promDiscount;
 			}
 		}
 		return *this;
 	}
+
 	Cars::~Cars() {
 		delete[] m_brandOfCar;
 		m_brandOfCar = nullptr;
@@ -65,22 +69,23 @@ namespace sdds
 	void Cars::read(std::istream& is) {
 		char s = '\0';
 		char p = '\0';
-		char carBrand[31];
+		string brandCar;
 		delete[] m_brandOfCar;
 		m_brandOfCar = nullptr;
 		if (!is.fail()) { //ensuring the istream is in a good state before data is accepted
 			is >> s;
-			if (s == 'N' || s == 'U') this->m_statusOfCar = s; //only N or U are allowed in the member. should add an else statement for if it is not N nor U
+			if (s == 'N' || s == 'U') m_statusOfCar = s; //only N or U are allowed in the member. should add an else statement for if it is not N nor U
 			is.ignore(); //extracting the ","
-			is.getline(carBrand, 30, ',');
-			alocpy(m_brandOfCar, carBrand); // re used this function from my milestone 5 in OOP244
-			is.getline(m_modelOfCar, 25, ',');
-			is >> this->m_manYear;
+			getline(is, brandCar, ',');
+			m_brandOfCar = new char[strlen(brandCar.c_str()) + 1];
+			strcpy(m_brandOfCar, brandCar.c_str());
+			is.getline(m_modelOfCar, 15, ',');
+			is >> m_manYear;
 			is.ignore(); //eating the comma
-			is >> this->m_priceOfCar;
+			is >> m_priceOfCar;
 			is.ignore(); //eating the comma
 			is >> p;
-			this->m_promDiscount = (p == 'Y' ? true : false);
+			m_promDiscount = (p == 'Y' ? true : false);
 			is.ignore(2000, '\n'); //extracts the newline character
 		}
 	}
@@ -117,11 +122,10 @@ namespace sdds
 		return m_statusOfCar;
 	}
 
-
 	// returns true if the Car is new
 	Cars::operator bool() const
 	{
-		return m_statusOfCar == 'N';
+		return m_statusOfCar == 'N' ? true : false;
 	}
 
 	std::istream& operator>>(std::istream& is, Cars& car) {

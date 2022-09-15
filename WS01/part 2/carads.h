@@ -16,11 +16,11 @@ extern double g_discount; // dicsount global variable
 namespace sdds
 {
 	void listArgs(int argc, char* argv[]); // lists out the arguments put into the program from the command line
-	void alocpy(char*& destination, const char* source);
+	//void alocpy(char*& destination, const char* source);
 
 	class Cars
 	{
-		char* m_brandOfCar; // Brand of car
+		char* m_brandOfCar{}; // Brand of car
 		char m_modelOfCar[15]; // Model of the car
 		int m_manYear; // manufacture year of car
 		double m_priceOfCar; // price of car
