@@ -35,7 +35,7 @@ namespace sdds
 		//Rule of three
 		Cars(const Cars& cars); // copy constructor
 		Cars& operator=(const Cars& cars); // assignment operator
-		virtual ~Cars(); // destructor, not sure if it should be virtual or not
+		~Cars(); // destructor, not sure if it should be virtual or not
 		operator bool() const; // returns true if the car is new
 	};
 	std::istream& operator>>(std::istream& is, Cars& car);

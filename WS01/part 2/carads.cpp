@@ -47,6 +47,8 @@ namespace sdds
 		if (this != &cars) {
 			if (cars.m_brandOfCar!= nullptr) {
 				alocpy(m_brandOfCar, cars.m_brandOfCar); // re used this function from my milestone 5 in OOP244
+				/*m_brandOfCar = new char[strlen(cars.m_brandOfCar) + 1];
+				strcpy(m_brandOfCar, cars.m_brandOfCar);*/
 				strncpy(m_modelOfCar, cars.m_modelOfCar, 15);
 				m_manYear = cars.m_manYear;
 				m_priceOfCar = cars.m_priceOfCar;
@@ -61,13 +63,17 @@ namespace sdds
 	}
 
 	void Cars::read(std::istream& is) {
-		char s{ 0 };
-		char p{ 0 };
+		char s = '\0';
+		char p = '\0';
+		char carBrand[31];
+		delete[] m_brandOfCar;
+		m_brandOfCar = nullptr;
 		if (!is.fail()) { //ensuring the istream is in a good state before data is accepted
 			is >> s;
 			if (s == 'N' || s == 'U') this->m_statusOfCar = s; //only N or U are allowed in the member. should add an else statement for if it is not N nor U
 			is.ignore(); //extracting the ","
-			is.getline(m_brandOfCar, 10, ',');
+			is.getline(carBrand, 30, ',');
+			alocpy(m_brandOfCar, carBrand); // re used this function from my milestone 5 in OOP244
 			is.getline(m_modelOfCar, 25, ',');
 			is >> this->m_manYear;
 			is.ignore(); //eating the comma
@@ -111,21 +117,11 @@ namespace sdds
 		return m_statusOfCar;
 	}
 
-	void alocpy(char*& destination, const char* source) {
-		delete[] destination;
-		destination = nullptr;
-		if (source != nullptr)
-		{
-			destination = new char[strlen(source) + 1];
-			strcpy(destination, source);
-		}
-
-	}
 
 	// returns true if the Car is new
 	Cars::operator bool() const
 	{
-		return (m_statusOfCar == 'N' ? true : false);
+		return m_statusOfCar == 'N';
 	}
 
 	std::istream& operator>>(std::istream& is, Cars& car) {
@@ -135,5 +131,15 @@ namespace sdds
 
 	void operator>>(const Cars& car1, Cars& car2) {
 		car2 = car1;
+	}
+
+	void alocpy(char*& destination, const char* source) {
+		delete[] destination;
+		destination = nullptr;
+		if (source != nullptr)
+		{
+			destination = new char[strlen(source) + 1];
+			strcpy(destination, source);
+		}
 	}
 }
