@@ -1,0 +1,22 @@
+Full Name: Olutoyosi Kuti
+Student Number: 102633211
+Seneca Email Address: okuti2@myseneca.ca
+Section Information Code: NCC
+ 
+This workshop treated a lot of topics that we covered in OOP244 so it was a nice reminder of object-oriented programming after the long summer break.
+ 
+Command line arguments were one of the topics this workshop covered and we learned how to receive arguments from the command line,
+ 
+The keyword constexpr used on the variable MAX_CARS causes the variable to be evaluated at compile time instead of run-time. It uses less memory and the value cannot be modified anywhere within the code as it is a run-time constant.
+ 
+Linkages was another topic covered in this workshop. They are connections between scopes that might be in the same module or a different module. The types are internal and external linkages. In the workshop we utilized external linkages, these are connections used globally. This means we can use the external linkage in any module created in the same translation unit. They are connected across different scopes in different modules, an example would be in the carads module the variables g_taxrate and g_discount of double type. They are accessible throughout the program as it can be referred to modules outside of carads. We use the keyword extern to identify an external linkage
+ 
+Internal linkages have a short life span that depends on the lifetime of the current module and are only visible to other scopes within its translation unit. An example of this would be the integer variable Counter in the display (bool reset) function of the carads module. The keyword static is used to identify internal linkages which are the static variables. Static variables have a global lifetime but a limited scope. They last the entire run of the program and can be used to keep track of information that relates logically to an entire class. The value and memory allocated to the variable is only done once throughout the entire program. The variable Counter was used to count the number of times the display (bool reset) function was called, this is useful because the display function does not loop through the object array and thus having a regular variable would not be able to keep track of how many times the function was called and can't print out an accurate number. The static variable helps to keep track of that.
+ 
+The main difference between internal and external linkages is that internal linkages refers to everything only in scope of a translation unit. The static variable Counter only exists in the carads module. while external linkages refer to things that exist beyond a particular translation unit. For example, the external variables g_discount and g_taxrate exist beyond the carads module and can be accessed in other modules and other translation units.
+ 
+I upgraded my Cars class by making m_brandOfCar a character pointer
+so it can accept any number of characters as the memory would be dynamically allocated. I also added a destructor to deallocate any dynamic memory allocated when the program goes out of scope. I implemented the rule of three by adding a copy constructor to allow the Cars object to be copied, and a copy assignment operator that was used in the overloaded >> operator to assign the values of car 1 to car 2.
+ 
+I had difficulties in finding a way to run my program with the command line arguments in Visual Studio which made debugging very difficult. I was able to get help from my classmates on how to modify the settings on the software to allow my arguments. I also had issues remembering all the concepts used in OOP244 but with research and asking questions I was slowly able to regain my memory of Object-Oriented programming. I had a bug in my code that was causing my code to not print out the new cars in part 2 and the issue was in my assignment operator as I had forgotten to include the line of code that copies the m_statusOfCar from one object to the other. Overall, I enjoyed the workshop as it gave me a fresh reminder of OOP244
+
