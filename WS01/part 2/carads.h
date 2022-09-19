@@ -11,12 +11,11 @@ Date    14th September, 2022
 #ifndef SDDS_CARADS_H
 #define SDDS_CARADS_H
 
-extern double g_taxrate; // taxrate, global variable
+extern double g_taxrate; // taxrate global variable
 extern double g_discount; // dicsount global variable
 namespace sdds
 {
 	void listArgs(int argc, char* argv[]); // lists out the arguments put into the program from the command line
-	//void alocpy(char*& destination, const char* source);
 
 	class Cars
 	{

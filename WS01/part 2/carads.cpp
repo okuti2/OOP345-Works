@@ -48,7 +48,6 @@ namespace sdds
 	{
 		if (this != &cars) {
 			if (cars.m_brandOfCar!= nullptr) {
-				//alocpy(m_brandOfCar, cars.m_brandOfCar); // re used this function from my milestone 5 in OOP244
 				m_brandOfCar = new char[strlen(cars.m_brandOfCar) + 1];
 				strcpy(m_brandOfCar, cars.m_brandOfCar);
 				strncpy(m_modelOfCar, cars.m_modelOfCar, 15);
@@ -128,22 +127,13 @@ namespace sdds
 		return m_statusOfCar == 'N' ? true : false;
 	}
 
-	std::istream& operator>>(std::istream& is, Cars& car) {
+	std::istream& operator>>(std::istream& is, Cars& car) { //has the same functionality as Cars::read().
 		car.read(is);
 		return is;
 	}
 
-	void operator>>(const Cars& car1, Cars& car2) {
+	void operator>>(const Cars& car1, Cars& car2) { // same functionality as an assignment operator
 		car2 = car1;
 	}
 
-	void alocpy(char*& destination, const char* source) {
-		delete[] destination;
-		destination = nullptr;
-		if (source != nullptr)
-		{
-			destination = new char[strlen(source) + 1];
-			strcpy(destination, source);
-		}
-	}
 }

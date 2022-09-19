@@ -7,7 +7,6 @@
 #include <fstream>
 #include "carads.h"
 #include "carads.h" // This is intentional to test your safe guard in .h file 
-using namespace sdds;
 // TODO: explain in the reflection what is the effect of the keyword "constexpr"
 constexpr int MAX_CARS = 100;
 
