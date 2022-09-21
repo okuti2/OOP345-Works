@@ -22,21 +22,26 @@ namespace sdds
 		std::string m_winner{};
 		std::string m_loser{};
 		operator bool() const; // checks if the object is in a safe and empty state
-		TennisMatch();
+		TennisMatch(); //default constructor
+		TennisMatch(const char* tourneyId, const char* tourneyName, int matchID, const char* winner, const char* loser);
 	};
 	std::ostream& operator << (std::ostream& ostr, const TennisMatch& tm); // insertion operator overload
 
 	class TennisLog
 	{
 		TennisMatch* m_tennisMatch{};
+		unsigned m_numOfMatches = 0;
 	public:
 		TennisLog() {}; // default constructor
-		TennisLog(const std::string& filename);
-		~TennisLog();
-		void addMatch();
-		TennisLog& findMatches() const;
+		TennisLog(const char* filename);
+		TennisLog(const TennisLog& tennisLog); // copy constructor
+		TennisLog& operator=(const TennisLog& tennisLog); // assignment operator
+
+		~TennisLog(); // destructor
+		void addMatch(TennisMatch& TM);
+		TennisLog& findMatches(const char* name);
 		TennisMatch& operator[](size_t);
-		operator size_t();
+		operator size_t() const;
 	};
 
 }
