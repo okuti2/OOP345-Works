@@ -18,17 +18,27 @@ Date    19th September, 2022
 
 using namespace std;
 //static int numOfMatches = -1; if I use this take away the numOfMatches--
-static int numOfMatches{ 0 };
+//static int numOfMatches{ 0 };
 
 
 namespace sdds
 { 
-	TennisLog::TennisLog() : m_tennisMatch() {}
+	int TennisLog::m_numOfMatches{ 0 }; // look at Fardad's Lab notes for today
+
+	TennisLog::TennisLog() {
+		//m_tennisMatch = nullptr;
+		m_tennisMatch->m_tournamentId = {};
+		m_tennisMatch->m_tournamentName = {};
+		m_tennisMatch->m_matchId = 0;
+		m_tennisMatch->m_winner = {};
+		m_tennisMatch->m_loser = {};
+	}
 
 	TennisLog::TennisLog(const char*filename) {
 		string line;
 		ifstream file(filename);
-		while (file) m_numOfMatches += (file.get() == '\n'); // counts the number of newlines in the csv file
+		while (getline(file,line))
+			++m_numOfMatches; // counts the number of newlines in the csv file
 		m_numOfMatches--;
 		
 		delete[] m_tennisMatch;
@@ -38,14 +48,14 @@ namespace sdds
 		file.ignore(2000, '\n'); //extracts the newline character
 
 		
-		for (unsigned i = 0; i < m_numOfMatches; i++) {
-			if (file) {
+		for (int i = 0; i < m_numOfMatches; i++) {
+			if (file && !m_tennisMatch) {
 				getline(file, line, ',');
 				m_tennisMatch[i].m_tournamentId = line;
 				file.ignore();
 				line.clear();
 				getline(file, line, ',');
-				m_tennisMatch[i].m_tournamentName= line;
+				m_tennisMatch[i].m_tournamentName = line;
 				file.ignore();
 				line.clear();
 				file >> m_tennisMatch[i].m_matchId;
@@ -68,16 +78,14 @@ namespace sdds
 	TennisLog& TennisLog::operator=(const TennisLog& tennisLog) {
 		if (this != &tennisLog) {
 			if (m_numOfMatches != 0) {
-				for (unsigned i = 0; i < tennisLog.m_numOfMatches; i++) {
+				for (int i = 0; i < tennisLog.m_numOfMatches; i++) {
 					m_tennisMatch[i] = tennisLog.m_tennisMatch[i];
 				}
 				m_numOfMatches = tennisLog.m_numOfMatches;
 			}
 		}
-
 		return *this;
 	}
-
 
 	void TennisLog::addMatch(TennisMatch& TM) {
 		if (TM.m_tournamentId[0] != '\0') {
@@ -90,19 +98,31 @@ namespace sdds
 		}
 	}
 
-	TennisLog& TennisLog::findMatches(const char* name){
+	TennisLog& TennisLog::findMatches(const char* name) const{
 		TennisLog Matches;
-		for (size_t i = 0; i < m_numOfMatches; i++) {
+		for (int i = 0; i < m_numOfMatches; i++) {
 			if (strcmp(name, m_tennisMatch[i].m_loser.c_str()) == 0 || strcmp(name, m_tennisMatch[i].m_winner.c_str()) == 0) {
 				int matches = 0;
+				Matches.addMatch(m_tennisMatch[i]);
 			}
 		}
-
 		return Matches;
 	}
 
-	TennisMatch& TennisLog::operator[](size_t i) {
-		return m_tennisMatch[i];
+	TennisMatch& TennisLog::operator[](size_t i) const {
+		/*if (&m_tennisMatch[i] != nullptr) {
+			return m_tennisMatch[i];
+		}
+		else {
+			TennisMatch emptyMatch{};
+			return emptyMatch;
+		}*/
+
+		TennisMatch Result{};
+		if (i <= this->operator size_t()) {
+			Result = m_tennisMatch[i];
+		}
+		return Result;
 	}
 
 	TennisLog::operator size_t() const
@@ -110,17 +130,15 @@ namespace sdds
 		return m_numOfMatches;
 	}
 
-
-
-	TennisMatch::TennisMatch() {
-		m_tournamentId = '\0';
-		m_tournamentName = '\0';
-		m_matchId = 0;
-		m_winner = '\0';
-		m_loser = '\0';
+	TennisLog::~TennisLog() {
+		size_t num = m_numOfMatches;
+		for (size_t i = 0; i < num; i++) {
+			delete[] &m_tennisMatch[i];
+			m_numOfMatches--;
+		}
 	}
 
-	TennisMatch::TennisMatch(const char* tourneyId, const char* tourneyName, int matchID, const char* winner, const char* loser): m_tournamentId(tourneyId)  {
+	/*TennisMatch::TennisMatch(const char* tourneyId, const char* tourneyName, int matchID, const char* winner, const char* loser): m_tournamentId(tourneyId)  {
 		if (tourneyId != nullptr) {
 			m_tournamentId = tourneyId;
 			m_tournamentName = tourneyName;
@@ -129,16 +147,17 @@ namespace sdds
 			m_loser = loser;
 		}
 	}
-
-
-	TennisMatch::operator bool() const
-	{
-		return (m_tournamentId.length() == 0 ? false : true);
+	*/
+	// returns true if it is not empty
+	TennisMatch::operator bool() const {
+		bool ans;
+		m_tournamentId.c_str() != nullptr? ans =  true : ans = false;
+		return ans;
 	}
 
 	ostream& operator<<(std::ostream& ostr, const TennisMatch& TM)
 	{
-		if (TM.operator bool()) {
+		if (TM) {
 			ostr << right << setfill('.') << setw(20) << "Tourney ID : ";
 			ostr << left << setw(30) << TM.m_tournamentId << endl;
 			ostr << right << setfill('.') << setw(20) << "Match ID : ";
@@ -151,7 +170,7 @@ namespace sdds
 			ostr << left << setw(30) << TM.m_loser<< endl;
 		}
 		else {
-			ostr << "Empty Match" << endl;
+			ostr << "Empty Match";
 		}
 		return ostr;
 	}
