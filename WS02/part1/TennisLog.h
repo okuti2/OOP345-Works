@@ -21,6 +21,8 @@ namespace sdds
 		unsigned m_matchId{ 0 };
 		std::string m_winner{};
 		std::string m_loser{};
+		TennisMatch& operator=(const TennisMatch& TM); // assignment operator
+
 		void display(std::ostream& ostr) const;
 
 		//operator bool() const;
@@ -31,7 +33,7 @@ namespace sdds
 	class TennisLog
 	{
 		TennisMatch* m_tennisMatch{};
-		int m_numOfMatches{ 0 };
+		unsigned m_numOfMatches{ 0 };
 	public:
 		TennisLog(); // default constructor
 		TennisLog(const char* filename);
