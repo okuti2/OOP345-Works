@@ -21,16 +21,17 @@ namespace sdds
 		unsigned m_matchId{ 0 };
 		std::string m_winner{};
 		std::string m_loser{};
-		operator bool() const;
+		void display(std::ostream& ostr) const;
+
+		//operator bool() const;
 		//TennisMatch(const char* tourneyId, const char* tourneyName, int matchID, const char* winner, const char* loser);
 	};
-
 	std::ostream& operator << (std::ostream& ostr, const TennisMatch& tm); // insertion operator overload
 
 	class TennisLog
 	{
-		TennisMatch* m_tennisMatch;
-		static int m_numOfMatches;
+		TennisMatch* m_tennisMatch{};
+		int m_numOfMatches{ 0 };
 	public:
 		TennisLog(); // default constructor
 		TennisLog(const char* filename);
@@ -39,8 +40,8 @@ namespace sdds
 
 		~TennisLog(); // destructor
 		void addMatch(TennisMatch& TM);
-		TennisLog& findMatches(const char* name) const;
-		TennisMatch& operator[](size_t) const;
+		TennisLog findMatches(const char* name) const;
+		TennisMatch operator[](size_t) const;
 		operator size_t() const;
 	};
 
