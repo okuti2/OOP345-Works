@@ -161,15 +161,15 @@ namespace sdds
 
    void TennisMatch::display(std::ostream& ostr)const {
       if (m_matchId != 0) {
-         ostr << right << setfill('.') << setw(20) << "Tourney ID : ";
+         ostr << right << setfill('.') << setw(23) << "Tourney ID : ";
          ostr << left << setw(30) << m_tournamentId << endl;
-         ostr << right << setfill('.') << setw(20) << "Match ID : ";
+         ostr << right << setfill('.') << setw(23) << "Match ID : ";
          ostr << left << setw(30) << m_matchId << endl;
-         ostr << right << setfill('.') << setw(20) << "Tourney : ";
+         ostr << right << setfill('.') << setw(23) << "Tourney : ";
          ostr << left << setw(30) << m_tournamentName << endl;
-         ostr << right << setfill('.') << setw(20) << "Winner : ";
+         ostr << right << setfill('.') << setw(23) << "Winner : ";
          ostr << left << setw(30) << m_winner << endl;
-         ostr << right << setfill('.') << setw(20) << "Loser : ";
+         ostr << right << setfill('.') << setw(23) << "Loser : ";
          ostr << left << setw(30) << m_loser << endl;
       }
       else {
