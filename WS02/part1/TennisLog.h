@@ -40,7 +40,7 @@ namespace sdds
 		TennisLog(const TennisLog& tennisLog); // copy constructor
 		TennisLog& operator=(const TennisLog& tennisLog); // assignment operator
 
-		~TennisLog(); // destructor
+		virtual ~TennisLog(); // destructor
 		void addMatch(TennisMatch& TM);
 		TennisLog findMatches(const char* name) const;
 		TennisMatch operator[](size_t) const;

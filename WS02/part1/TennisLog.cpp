@@ -17,9 +17,6 @@ Date    19th September, 2022
 #include "TennisLog.h"
 
 using namespace std;
-//static int numOfMatches = -1; if I use this take away the numOfMatches--
-//static int numOfMatches{ 0 };
-
 
 namespace sdds
 {
@@ -76,8 +73,6 @@ namespace sdds
       *this = tLog;
    }
 
-
-
    TennisLog& TennisLog::operator=(const TennisLog& tennisLog) {
       if (this != &tennisLog) {
          m_tennisMatch = new TennisMatch[tennisLog.m_numOfMatches + 1];
@@ -91,7 +86,7 @@ namespace sdds
                m_tennisMatch[i] = tennisLog.m_tennisMatch[i];
             }
 
-            m_tennisMatch = tennisLog.m_tennisMatch; //only does a shallow copy ?
+            //m_tennisMatch = tennisLog.m_tennisMatch; //only does a shallow copy ?
             m_numOfMatches = tennisLog.m_numOfMatches;
          }
       }
@@ -123,6 +118,7 @@ namespace sdds
 
    TennisLog TennisLog::findMatches(const char* name) const {
       TennisLog Matches{};
+      Matches.m_tennisMatch = new TennisMatch[m_numOfMatches];
       for (size_t i = 0; i < m_numOfMatches; i++) {
          if (strcmp(name, m_tennisMatch[i].m_loser.c_str()) == 0 || strcmp(name, m_tennisMatch[i].m_winner.c_str()) == 0) {
             Matches.addMatch(m_tennisMatch[i]);
@@ -163,7 +159,6 @@ namespace sdds
       return *this;
    }
 
-
    void TennisMatch::display(std::ostream& ostr)const {
       if (m_matchId != 0) {
          ostr << right << setfill('.') << setw(20) << "Tourney ID : ";
@@ -181,7 +176,6 @@ namespace sdds
          ostr << "Empty Match";
       }
    }
-
 
    ostream& operator<<(std::ostream& ostr, const TennisMatch& TM)
    {
