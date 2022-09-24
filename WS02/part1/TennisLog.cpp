@@ -120,7 +120,6 @@ namespace sdds
 
    TennisLog TennisLog::findMatches(const char* name) const {
       TennisLog Matches{};
-      //Matches.m_tennisMatch = new TennisMatch[m_numOfMatches];
       for (size_t i = 0; i < m_numOfMatches; i++) {
          if (strcmp(name, m_tennisMatch[i].m_loser.c_str()) == 0 || strcmp(name, m_tennisMatch[i].m_winner.c_str()) == 0) {
             Matches.addMatch(m_tennisMatch[i]);
