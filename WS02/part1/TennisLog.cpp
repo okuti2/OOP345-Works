@@ -20,7 +20,6 @@ using namespace std;
 
 namespace sdds
 {
-
    TennisLog::TennisLog() {
       m_tennisMatch = nullptr;
       m_tennisMatch = new TennisMatch[m_numOfMatches + 1];
