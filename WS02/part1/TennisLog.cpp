@@ -74,6 +74,7 @@ namespace sdds
 
    TennisLog& TennisLog::operator=(const TennisLog& tennisLog) {
       if (this != &tennisLog) {
+         delete[] m_tennisMatch;
          m_tennisMatch = new TennisMatch[tennisLog.m_numOfMatches + 1];
          if (tennisLog.m_numOfMatches != 0) {
             for (size_t i = 0; i < tennisLog.m_numOfMatches; i++) { // supposed to deep copy but I get a writing error
@@ -94,9 +95,9 @@ namespace sdds
 
    void TennisLog::addMatch(TennisMatch& TM) {
       if (TM.m_tournamentId[0] != '\0') {
-         m_numOfMatches++;
-         TennisMatch* temp = new TennisMatch[m_numOfMatches + 1];
-         if (m_numOfMatches == 1) {
+         TennisMatch* temp = new TennisMatch[m_numOfMatches+1];
+         if (m_numOfMatches == 0) {
+            m_numOfMatches++;
             temp[0] = TM;
          }
          else {
@@ -104,11 +105,13 @@ namespace sdds
 
                temp[i] = m_tennisMatch[i];
             }
-            temp[m_numOfMatches - 1].m_tournamentId = TM.m_tournamentId;
-            temp[m_numOfMatches - 1].m_tournamentName = TM.m_tournamentName;
-            temp[m_numOfMatches - 1].m_matchId = TM.m_matchId;
-            temp[m_numOfMatches - 1].m_winner = TM.m_winner;
-            temp[m_numOfMatches - 1].m_loser = TM.m_loser;
+            m_numOfMatches++;
+
+            temp[m_numOfMatches-1].m_tournamentId = TM.m_tournamentId;
+            temp[m_numOfMatches-1].m_tournamentName = TM.m_tournamentName;
+            temp[m_numOfMatches-1].m_matchId = TM.m_matchId;
+            temp[m_numOfMatches-1].m_winner = TM.m_winner;
+            temp[m_numOfMatches-1].m_loser = TM.m_loser;
          }
          delete[] m_tennisMatch;
          m_tennisMatch = temp;
@@ -117,7 +120,7 @@ namespace sdds
 
    TennisLog TennisLog::findMatches(const char* name) const {
       TennisLog Matches{};
-      Matches.m_tennisMatch = new TennisMatch[m_numOfMatches];
+      //Matches.m_tennisMatch = new TennisMatch[m_numOfMatches];
       for (size_t i = 0; i < m_numOfMatches; i++) {
          if (strcmp(name, m_tennisMatch[i].m_loser.c_str()) == 0 || strcmp(name, m_tennisMatch[i].m_winner.c_str()) == 0) {
             Matches.addMatch(m_tennisMatch[i]);
