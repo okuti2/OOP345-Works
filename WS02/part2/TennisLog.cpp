@@ -92,7 +92,6 @@ namespace sdds
          src.m_numOfMatches = 0;
          m_tennisMatch = src.m_tennisMatch;
          src.m_tennisMatch = nullptr;
-         
       }
       return *this;
    }
@@ -134,7 +133,7 @@ namespace sdds
 
    TennisMatch TennisLog::operator[](size_t i) const {
       TennisMatch Result{};
-      if (i >= 0 && i <= size_t(m_numOfMatches)) {
+      if (i >= 0 && i <= size_t(m_numOfMatches) && m_numOfMatches > 0) {
          Result = m_tennisMatch[i];
       }
       return Result;
@@ -153,7 +152,7 @@ namespace sdds
 
    TennisMatch& TennisMatch::operator=(const TennisMatch& TM) {
       if (this != &TM) {
-         if (&TM != nullptr) {
+         if (TM.m_matchId != 0) {
             m_tournamentId = TM.m_tournamentId;
             m_tournamentName = TM.m_tournamentName;
             m_matchId = TM.m_matchId;
