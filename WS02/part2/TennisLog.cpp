@@ -23,13 +23,6 @@ namespace sdds
    TennisLog::TennisLog() {
       m_tennisMatch = nullptr;
       m_tennisMatch = new TennisMatch[m_numOfMatches + 1];
-      if (m_numOfMatches == 0) {
-         m_tennisMatch[0].m_tournamentId[0] = '\0';
-         m_tennisMatch[0].m_tournamentName[0] = '\0';
-         m_tennisMatch[0].m_matchId = 0;
-         m_tennisMatch[0].m_winner[0] = '\0';
-         m_tennisMatch[0].m_loser[0] = '\0';
-      }
    }
 
    TennisLog::TennisLog(const char* filename) {
@@ -183,6 +176,7 @@ namespace sdds
          ostr << left << setw(30) << m_winner << endl;
          ostr << right << setfill('.') << setw(23) << "Loser : ";
          ostr << left << setw(30) << m_loser << endl;
+         ostr<<setfill(' ');
       }
       else {
          ostr << "Empty Match";
