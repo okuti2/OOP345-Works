@@ -33,7 +33,7 @@ namespace sdds
       m_numOfMatches--;
 
       delete[] m_tennisMatch;
-      m_tennisMatch = new TennisMatch[m_numOfMatches + 1];
+      m_tennisMatch = new TennisMatch[m_numOfMatches];
 
       file.close();
       file.open(filename);
@@ -105,7 +105,6 @@ namespace sdds
          }
          else {
             for (size_t i = 0; i < size_t(m_numOfMatches); i++) {
-
                temp[i] = m_tennisMatch[i];
             }
             m_numOfMatches++;

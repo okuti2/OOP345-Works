@@ -18,7 +18,7 @@ namespace sdds
 	{
 		std::string m_tournamentId{};
 		std::string m_tournamentName{};
-		unsigned m_matchId{ 0 };
+		unsigned m_matchId{0};
 		std::string m_winner{};
 		std::string m_loser{};
 		TennisMatch& operator=(const TennisMatch& TM); // assignment operator

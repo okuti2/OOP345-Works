@@ -11,9 +11,6 @@ Date    24th September, 2022
 -----------------------------------------------------------*/
 #ifndef SDDS_TIMER_H
 #define SDDS_TIMER_H
-#include <string>
-
-#define MAX_EVENT_NUMBER 10
 
 namespace sdds
 {
