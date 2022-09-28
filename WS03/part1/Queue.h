@@ -71,13 +71,13 @@ namespace sdds
    /*template <typename T, unsigned CAPACITY>
    unsigned Queue<T, CAPACITY>::m_count = 0u;*/
 
-   // might take off 
-   template <typename T, unsigned int CAPACITY>
+   // initializing the static object
+   template <typename T, unsigned CAPACITY>
    T Queue<T, CAPACITY>::m_empty = T{};
 
    //specialization
    template<>
-   Dictionary Queue<Dictionary, 100u>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
+   inline Dictionary Queue<Dictionary, 100u>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
 
    template <typename T, unsigned CAPACITY>
    std::ostream& Queue<T, CAPACITY>::display(std::ostream& ostr) const {
