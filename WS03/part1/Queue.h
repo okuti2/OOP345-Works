@@ -38,9 +38,9 @@ namespace sdds
       //a mutator that adds a copy of the parameter to the queue if there still is capacity. If the item has been added, this function return true; false otherwise.
       bool push(const T& item) {
          bool result = false;
-         m_count++;
          if (m_count < CAPACITY) {
             m_object[m_count] = item;
+            m_count++;
             result = true;
          }
          return result;
@@ -85,8 +85,8 @@ namespace sdds
       ostr << "| Dictionary Content |" << std::endl;
       ostr << "----------------------" << std::endl;
       for (size_t i = 0; i < m_count; i++) {
-         ostr << i << std::endl;
-         //ostr << m_object[i] << std::endl;
+         //ostr << i << std::endl;
+         ostr << m_object[i] << std::endl;
       }
       ostr << "----------------------" << std::endl;
       return ostr;

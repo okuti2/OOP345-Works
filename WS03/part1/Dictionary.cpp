@@ -64,4 +64,11 @@ namespace sdds
    };
 
    // needs << overload operator 
+   ostream& operator<<(std::ostream& ostr, const Dictionary& dictionary)
+   {
+      if (&dictionary.getTerm()) {
+         ostr<<setw(20)<< right << dictionary.getTerm() << ": " << dictionary.getDefinition();
+      }
+      return ostr;
+   }
 }

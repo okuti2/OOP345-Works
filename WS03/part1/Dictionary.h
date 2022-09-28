@@ -28,6 +28,7 @@ namespace sdds
 		}
 		Dictionary(const std::string& term, const std::string& definition) : m_term{ term }, m_definition{ definition }{} // constructor
 		Dictionary(); // default constructor 
+
 		//Dictionary(const Dictionary& dictionary); //copy constructor
 		//Dictionary& operator=(const Dictionary& dictionary); // copy assignment operator
 		//Dictionary(Dictionary&& dictionary) noexcept; // move constructor
@@ -38,6 +39,7 @@ namespace sdds
 		//       that the class needs in order to work with the Queue class.
 		//       Implement them in the Dictionary.cpp file.
 	};
+	std::ostream& operator << (std::ostream& ostr, const Dictionary& dictionary); // insertion operator overload
 
 }
 #endif //! SDDS_DICTIONARY_H
