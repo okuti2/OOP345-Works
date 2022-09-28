@@ -18,7 +18,7 @@ namespace sdds
 	{
 		std::string m_term{};
 		std::string m_definition{};
-		
+
 	public:
 		const std::string& getTerm() const {
 			return m_term;
@@ -28,19 +28,17 @@ namespace sdds
 		}
 		Dictionary(const std::string& term, const std::string& definition) : m_term{ term }, m_definition{ definition }{} // constructor
 		Dictionary(); // default constructor 
-		Dictionary(const Dictionary& dictionary); //copy constructor
-		Dictionary& operator=(const Dictionary& dictionary); // copy assignment operator
-		Dictionary(Dictionary&& dictionary) noexcept; // move constructor
-		Dictionary& operator=(Dictionary&& dictionary); // move assignment operator
-		void setDefinition(const string& definition);
-		void setTerm(const string& term);
+		//Dictionary(const Dictionary& dictionary); //copy constructor
+		//Dictionary& operator=(const Dictionary& dictionary); // copy assignment operator
+		//Dictionary(Dictionary&& dictionary) noexcept; // move constructor
+		//Dictionary& operator=(Dictionary&& dictionary); // move assignment operator
 		virtual ~Dictionary(); // destructor
 
 		// TODO: Code the missing prototype functions and operators
 		//       that the class needs in order to work with the Queue class.
 		//       Implement them in the Dictionary.cpp file.
 	};
-	
+
 }
 #endif //! SDDS_DICTIONARY_H
 

@@ -23,24 +23,23 @@ namespace sdds
    class Queue
    {
       T m_object[CAPACITY]{};
-      static unsigned m_count{0u};
+      unsigned m_count{ 0u };
       static T m_empty;
-      
-
    public:
       Queue() {
-         ++m_count
+         m_count = 0;
       }
 
       virtual ~Queue() {
-         --m_count
-      }
+         m_count = 0;
+         // should set m_object to empty array
+      };
 
       //a mutator that adds a copy of the parameter to the queue if there still is capacity. If the item has been added, this function return true; false otherwise.
       bool push(const T& item) {
          bool result = false;
+         m_count++;
          if (m_count < CAPACITY) {
-            ++m_count;
             m_object[m_count] = item;
             result = true;
          }
@@ -57,7 +56,7 @@ namespace sdds
          return temp;
       }
 
-      const static unsigned size()const {
+      unsigned size() const {
          return m_count;
       }
 
@@ -69,25 +68,29 @@ namespace sdds
       }
    };
 
-   template <typename T, unsigned CAPACITY>
-   unsigned Queue<T, CAPACITY>::m_count = 0u;
+   /*template <typename T, unsigned CAPACITY>
+   unsigned Queue<T, CAPACITY>::m_count = 0u;*/
+
+   // might take off 
+   template <typename T, unsigned int CAPACITY>
+   T Queue<T, CAPACITY>::m_empty = T{};
 
    //specialization
-   template<> 
+   template<>
    Dictionary Queue<Dictionary, 100u>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
 
    template <typename T, unsigned CAPACITY>
-   std::ostream& Queue<T,CAPACITY>::display(std::ostream& ostr) const {
-      ostr << "----------------------\n";
-      ostr << "| Dictionary Content |\n";
-      ostr << "----------------------\n";
-      for (size_t i; i < CAPACITY; i++) {
-         ostr << T[i] << "\n";
+   std::ostream& Queue<T, CAPACITY>::display(std::ostream& ostr) const {
+      ostr << "----------------------" << std::endl;
+      ostr << "| Dictionary Content |" << std::endl;
+      ostr << "----------------------" << std::endl;
+      for (size_t i = 0; i < m_count; i++) {
+         ostr << i << std::endl;
+         //ostr << m_object[i] << std::endl;
       }
-      ostr << "----------------------\n";
+      ostr << "----------------------" << std::endl;
       return ostr;
    };
-   
-      
+
 }
 #endif //! SDDS_QUEUE_H
