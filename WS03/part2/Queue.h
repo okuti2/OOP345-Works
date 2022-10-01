@@ -76,7 +76,7 @@ namespace sdds
 
    //specialization
    template<>
-   inline Dictionary Queue<Dictionary, 100>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
+   inline Dictionary Queue<Dictionary, 100>::m_empty = Dictionary{ "Empty Term", "Empty Substitute" };
 
    template <typename T, unsigned CAPACITY>
    std::ostream& Queue<T, CAPACITY>::display(std::ostream& ostr) const {
