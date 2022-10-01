@@ -10,7 +10,7 @@ Date    29th September, 2022
 -----------------------------------------------------------*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include "Queue.h"
+#include<iomanip>
 #include "Dictionary.h"
 
 using namespace std;
@@ -37,9 +37,10 @@ namespace sdds
    // needs << overload operator 
    ostream& operator<<(std::ostream& ostr, const Dictionary& dictionary)
    {
-      if (&dictionary.getTerm()) {
+      if (&dictionary.getTerm()){
          ostr << setw(20) << right << dictionary.getTerm() << ": " << dictionary.getDefinition();
       }
+      
       return ostr;
    }
 }

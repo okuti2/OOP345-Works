@@ -17,6 +17,7 @@ Date    29th September, 2022
 #include<cstring>
 #include "Dictionary.h"
 
+
 namespace sdds
 {
    template <typename T, unsigned CAPACITY>
@@ -60,7 +61,9 @@ namespace sdds
 
       T& operator[](unsigned i)
       {
-         return i < CAPACITY ? m_object[i] : m_empty;
+        // return i < CAPACITY ? m_object[i] : m_empty;
+         return i < m_count ? m_object[i] : m_empty;
+
       }
 
       std::ostream& display(std::ostream& ostr = std::cout) const;
@@ -73,7 +76,7 @@ namespace sdds
 
    //specialization
    template<>
-   inline Dictionary Queue<Dictionary, 100u>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
+   inline Dictionary Queue<Dictionary, 100>::m_empty = Dictionary{ "Empty substitute", "Empty Term" };
 
    template <typename T, unsigned CAPACITY>
    std::ostream& Queue<T, CAPACITY>::display(std::ostream& ostr) const {

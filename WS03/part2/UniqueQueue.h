@@ -15,6 +15,7 @@ Date    29th September, 2022
 #include<string>
 #include <string.h>
 #include<cstring>
+#include "Dictionary.h"
 #include "Queue.h"
 
 namespace sdds
