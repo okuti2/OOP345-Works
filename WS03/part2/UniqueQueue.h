@@ -54,7 +54,7 @@ namespace sdds
 
       for (unsigned i = 0; i < count && copy == false; i++)
       {
-         if (std::fabs(Queue<double, 100u>::operator[](i) - item)<= difference) {
+         if (std::abs(Queue<double, 100u>::operator[](i) - item)<= difference) {
             copy = true;
          }
       }
