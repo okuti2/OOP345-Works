@@ -32,7 +32,7 @@ namespace sdds
    template <typename T>
    bool UniqueQueue<T>::push(const T& item) {
       bool result = false;
-      bool copy = false;
+      bool copy = false;       
       unsigned count = Queue<T, 100u>::size();
       count++;
       for (unsigned i = 0; i < count; i++)
@@ -60,7 +60,6 @@ namespace sdds
          }
       }
       if (copy == false) result = Queue<double, 100u>::push(item);
-
       return result;
    }
 
@@ -69,8 +68,6 @@ namespace sdds
       queue.display(ostr);
       return ostr;
    }
-
-   
 }
 
 #endif //! SDDS_UNIQUEQUEUE_H

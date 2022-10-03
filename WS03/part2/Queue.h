@@ -17,7 +17,6 @@ Date    29th September, 2022
 #include<cstring>
 #include "Dictionary.h"
 
-
 namespace sdds
 {
    template <typename T, unsigned CAPACITY>
@@ -61,9 +60,7 @@ namespace sdds
 
       T& operator[](unsigned i)
       {
-        // return i < CAPACITY ? m_object[i] : m_empty;
          return i < m_count ? m_object[i] : m_empty;
-
       }
 
       std::ostream& display(std::ostream& ostr = std::cout) const;
