@@ -56,29 +56,26 @@ namespace sdds
    }
 
    void Reservation::trim(std::string& str) const {
-      for (size_t i = 0u; i < str.length() + 1; i++)
-      {
-         str.erase(i, str.find_first_not_of(' '));
-         str.erase(str.find_last_not_of(' ') + 1);
-      }
+      str.erase(str.find_last_not_of(' ') + 1);
+      str.erase(0, str.find_first_not_of(' '));
    }
 
    std::ostream& operator<<(std::ostream& ostr, const Reservation& res) {
       ostr << "Reservation ";
-      ostr << res.m_reservationId <<":"<< std::right<< std::setw(10);
-      ostr << res.m_name << std::setw(20) << std::right;
-      ostr << "<" << res.m_email << ">" << std::setw(20) << std::left;
-      if (6 <= res.m_time <= 9) {
-         ostr << " Breakfast ";
+      ostr << std::right<< std::setw(10)<< res.m_reservationId<< ":";
+      ostr << std::right << std::setw(20) << res.m_name<<"  ";
+      ostr << std::left <<std::setw(24) << ("<" + res.m_email + ">");
+      if (res.m_time>=6 && res.m_time <= 9) {
+         ostr <<std::left << " Breakfast ";
       }
-      else if (11 <= res.m_time <= 15) {
-         ostr << " Lunch ";
+      else if (res.m_time >= 11 && res.m_time <= 15) {
+         ostr << std::left<< " Lunch ";
       }
-      else if (17 <= res.m_time <= 21) {
-         ostr << " Dinner ";
+      else if (res.m_time >= 17 && res.m_time <= 21) {
+         ostr << std::left << " Dinner ";
       }
       else {
-         ostr << " Drinks ";
+         ostr << std::left << " Drinks ";
       }
       ostr << " on day " << res.m_day << " @ " << res.m_time << ":00 for " << res.m_numOfPeople;
 
