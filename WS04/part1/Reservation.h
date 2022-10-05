@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Workshop 4 part 2
+Workshop 4 part 1
 Module: Reservation
 Filename: Reservation .cpp
 Version 1
