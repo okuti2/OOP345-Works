@@ -20,8 +20,8 @@ namespace sdds
    //class Reservation;
    class Restaurant
    {
-      const Reservation** m_reservation{};
-      size_t m_noOfReservations;
+      Reservation** m_reservation{};
+      size_t m_noOfReservations{ 0u };
    public:
       Restaurant();
       Restaurant(const Reservation* reservations[], size_t cnt);

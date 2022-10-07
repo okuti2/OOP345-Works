@@ -13,13 +13,25 @@ Date    4th October, 2022
 
 #include <iostream>
 #include <string>
+#include "Reservation.h"
 
 namespace sdds
-   // resevation between confirmationSender and Reservation
+   // aggregation between confirmationSender and Reservation
 {
    class ConfirmationSender
    {
-
+      const sdds::Reservation** m_reservation{};
+      size_t m_noOfReservations{ 0u };
+   public:
+      ConfirmationSender();
+      ConfirmationSender(const ConfirmationSender& src); // copy constructor
+      ConfirmationSender& operator=(const ConfirmationSender& src); // copy assignment
+      ConfirmationSender(ConfirmationSender&& src) noexcept; // move constructor
+      ConfirmationSender& operator=(ConfirmationSender&& src) noexcept; //move assignment
+      ConfirmationSender& operator+=(const Reservation& res); 
+      ConfirmationSender& operator-=(const Reservation& res);
+      ~ConfirmationSender(); // destructor
+      friend std::ostream& operator <<(std::ostream& ostr, const ConfirmationSender& src);
    };
 
 }

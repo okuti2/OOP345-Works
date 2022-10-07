@@ -63,8 +63,8 @@ namespace sdds
    std::ostream& operator<<(std::ostream& ostr, const Reservation& res) {
       ostr << "Reservation ";
       ostr << std::right << std::setw(10) << res.m_reservationId << ":";
-      ostr << std::right << std::setw(20) << res.m_name << "  ";
-      ostr << std::left << std::setw(24) << ("<" + res.m_email + ">");
+      ostr << std::right << std::setw(21) << res.m_name << "  ";
+      ostr << std::left << std::setw(23) << ("<" + res.m_email + ">");
       if (res.m_time >= 6 && res.m_time <= 9) {
          ostr << std::left << " Breakfast ";
       }
@@ -77,13 +77,13 @@ namespace sdds
       else {
          ostr << std::left << " Drinks ";
       }
-      ostr << " on day " << res.m_day << " @ " << res.m_time << ":00 for " << res.m_numOfPeople;
+      ostr << "on day " << res.m_day << " @ " << res.m_time << ":00 for " << res.m_numOfPeople;
 
       if (res.m_numOfPeople == 1) {
-         ostr << " person. ";
+         ostr << " person.";
       }
       else {
-         ostr << " people. ";
+         ostr << " people.";
       }
       ostr << "\n";
 
