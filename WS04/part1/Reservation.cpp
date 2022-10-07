@@ -77,13 +77,13 @@ namespace sdds
       else {
          ostr << std::left << " Drinks ";
       }
-      ostr << " on day " << res.m_day << " @ " << res.m_time << ":00 for " << res.m_numOfPeople;
+      ostr << "on day " << res.m_day << "@ " << res.m_time << ":00 for " << res.m_numOfPeople;
 
       if (res.m_numOfPeople == 1) {
-         ostr << " person. ";
+         ostr << " person.";
       }
       else {
-         ostr << " people. ";
+         ostr << " people.";
       }
       ostr << "\n";
 
