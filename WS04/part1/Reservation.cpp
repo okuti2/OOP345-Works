@@ -64,7 +64,7 @@ namespace sdds
       ostr << "Reservation ";
       ostr << std::right<< std::setw(10)<< res.m_reservationId<< ":";
       ostr << std::right << std::setw(21) << res.m_name<<"  ";
-      ostr << std::left <<std::setw(24) << ("<" + res.m_email + ">");
+      ostr << std::left <<std::setw(23) << ("<" + res.m_email + ">");
       if (res.m_time>=6 && res.m_time <= 9) {
          ostr <<std::left << " Breakfast ";
       }
