@@ -75,19 +75,48 @@ namespace sdds
    }
 
    ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res) {
+      bool isCopy = false;
+      for (size_t i = 0u; i < m_noOfReservations; i++) {
+         if (m_reservation[i] == &res) isCopy = true;
+      }
+      if (isCopy==false) {
+         const Reservation** temp = new const Reservation * [m_noOfReservations + 1];
+         for (size_t i = 0u; i < m_noOfReservations; i++)
+         {
+           // temp[i] = new const Reservation(*m_reservation[i]);
+            temp[i] = m_reservation[i];
+         }
+          
+        // temp[m_noOfReservations] = new const Reservation(res);
+         temp[m_noOfReservations] = &res;
+
+         m_noOfReservations++;
+         delete[] m_reservation;
+         m_reservation = temp;
+      }
       return *this;
    }
 
    ConfirmationSender& ConfirmationSender::operator-=(const Reservation& res) {
+      for (size_t i = 0u; i < m_noOfReservations; i++)
+      {
+         if (m_reservation[i] == &res)
+         {
+            for (size_t j = i; j < m_noOfReservations; j++) {
+               m_reservation[j] = m_reservation[j + 1];
+            }
+            //m_reservation[m_noOfReservations] = nullptr;
+            m_noOfReservations--; // counter variable 
+         }
+      }
       return *this;
    }
 
    //Destructor
    ConfirmationSender::~ConfirmationSender() {
-      for (size_t i = 0; i < m_noOfReservations; i++) {
-         delete m_reservation[i];
-      }
+      
       delete[] m_reservation;
+      m_reservation = nullptr;
    }
 
    std::ostream& operator <<(std::ostream& ostr, const ConfirmationSender& src) {
@@ -97,8 +126,7 @@ namespace sdds
       if (src.m_noOfReservations == 0)
       {
          ostr << "There are no confirmations to send!" << std::endl;
-      }
-      if (src.m_noOfReservations > 0)
+      }else 
       {
          for (size_t i = 0; i < src.m_noOfReservations; i++)
          {
