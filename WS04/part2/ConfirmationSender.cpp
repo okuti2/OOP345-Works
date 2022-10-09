@@ -38,7 +38,8 @@ namespace sdds
 
          for (size_t i = 0u; i < m_noOfReservations; i++)
          {
-            m_reservation[i] = new const Reservation(*src.m_reservation[i]);
+            //m_reservation[i] = new const Reservation(*src.m_reservation[i]);
+            m_reservation[i] = src.m_reservation[i];
          }
       }
       return *this;
