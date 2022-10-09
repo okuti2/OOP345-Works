@@ -93,6 +93,7 @@ namespace sdds
 
          m_noOfReservations++;
          delete[] m_reservation;
+         m_reservation = new const Reservation * [m_noOfReservations];
          m_reservation = temp;
       }
       return *this;
