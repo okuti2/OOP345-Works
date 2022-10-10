@@ -77,7 +77,7 @@ namespace sdds
 
    ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res) {
       bool isCopy = false;
-      for (size_t i = 0u; i < m_noOfReservations; i++) {
+      for (size_t i = 0u; i < m_noOfReservations && !isCopy; i++) {
          if (m_reservation[i] == &res) isCopy = true;
       }
       if (isCopy==false) {
@@ -93,7 +93,7 @@ namespace sdds
 
          m_noOfReservations++;
          m_reservation = std::move(temp);
-        /* delete[] m_reservation;
+         /*delete[] m_reservation;
          m_reservation = temp;*/
       }
       return *this;
@@ -104,9 +104,11 @@ namespace sdds
       {
          if (m_reservation[i] == &res)
          {
-            for (size_t j = i; j < m_noOfReservations; j++) {
+            m_reservation[i] == nullptr;
+           /* for (size_t j = i; j < m_noOfReservations; j++) {
                m_reservation[j] = m_reservation[j + 1];
-            }
+            }*/
+
             //m_reservation[m_noOfReservations] = nullptr;
             m_noOfReservations--; // counter variable 
          }
