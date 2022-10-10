@@ -148,11 +148,8 @@ int main(int argc, char** argv)
 		sender1 += *ppReservations[9];
 		std::cout << sender1;
 		sender1 -= *ppReservations[16];
-		std::cout << "Removing [16]" << std::endl;
 		sender1 -= *ppReservations[9];
-		std::cout << "Removing [9]" << std::endl;
 		sender1 -= *ppReservations[7];
-		std::cout << "Removing [7]" << std::endl;
 		std::cout << sender1;
 		std::cout << "==========================\n\n";
 

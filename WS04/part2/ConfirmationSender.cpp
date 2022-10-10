@@ -84,7 +84,7 @@ namespace sdds
          const Reservation** temp = new const Reservation * [m_noOfReservations + 1];
          for (size_t i = 0u; i < m_noOfReservations; i++)
          {
-           // temp[i] = new const Reservation(*m_reservation[i]);
+            //temp[i] = new const Reservation(*m_reservation[i]);
             temp[i] = m_reservation[i];
          }
           
@@ -92,8 +92,9 @@ namespace sdds
          temp[m_noOfReservations] = &res;
 
          m_noOfReservations++;
-         delete[] m_reservation;
-         m_reservation = temp;
+         m_reservation = std::move(temp);
+        /* delete[] m_reservation;
+         m_reservation = temp;*/
       }
       return *this;
    }
