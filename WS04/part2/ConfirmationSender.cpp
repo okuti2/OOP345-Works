@@ -92,9 +92,9 @@ namespace sdds
          temp[m_noOfReservations] = &res;
 
          m_noOfReservations++;
-         m_reservation = std::move(temp);
-         /*delete[] m_reservation;
-         m_reservation = temp;*/
+         //m_reservation = std::move(temp);
+         delete[] m_reservation;
+         m_reservation = temp;
       }
       return *this;
    }
