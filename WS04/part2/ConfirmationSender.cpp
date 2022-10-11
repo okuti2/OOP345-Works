@@ -86,34 +86,38 @@ namespace sdds
          size_t i;
          for (i = 0u; i < m_noOfReservations; i++)
          {
-            //temp[i] = new const Reservation(*m_reservation[i]);
             temp[i] = m_reservation[i];
          }
           
-        // temp[m_noOfReservations] = new const Reservation(res);
          temp[i] = &res;
-
-         m_noOfReservations++;
          delete[] m_reservation;
          m_reservation = temp;
+         m_noOfReservations++;
+
       }
       return *this;
    }
 
    ConfirmationSender& ConfirmationSender::operator-=(const Reservation& res) {
+      size_t index = 0u;
       for (size_t i = 0u; i < m_noOfReservations; i++)
       {
-         if (m_reservation[i] == &res)
-         {
-            //m_reservation[i] = nullptr;
-            for (size_t j = i; j < m_noOfReservations; j++) {
-               m_reservation[j] = m_reservation[j + 1]; // invalid read error
-            }
-
-            //m_reservation[m_noOfReservations] = nullptr;
-            m_noOfReservations--; // counter variable 
-         }
+         if (m_reservation[i] == &res) index = i; // 1
       }
+
+      const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; //4
+      int i = 0;
+      int j = 0;
+      while (i < m_noOfReservations) { // i < 4; 
+         if (i != index) {
+            temp[j] = m_reservation[i];
+            j++;
+         }
+         i++;
+      }
+      delete[] m_reservation;
+      m_reservation = temp;
+      m_noOfReservations--;
       return *this;
    }
 
