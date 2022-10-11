@@ -81,7 +81,9 @@ namespace sdds
          if (m_reservation[i] == &res) isCopy = true;
       }
       if (isCopy==false) {
-         const Reservation** temp = new const Reservation * [m_noOfReservations + 1];
+         const Reservation** temp = new const Reservation * [m_noOfReservations + 1]; // invalid read 
+          //Reservation** temp = (Reservation **) malloc (sizeof(Reservation*)+ 1); // invalid read 
+
          for (size_t i = 0u; i < m_noOfReservations; i++)
          {
             //temp[i] = new const Reservation(*m_reservation[i]);
@@ -92,7 +94,6 @@ namespace sdds
          temp[m_noOfReservations] = &res;
 
          m_noOfReservations++;
-         //m_reservation = std::move(temp);
          delete[] m_reservation;
          m_reservation = temp;
       }
@@ -104,9 +105,9 @@ namespace sdds
       {
          if (m_reservation[i] == &res)
          {
-            m_reservation[i] = nullptr;
+            //m_reservation[i] = nullptr;
             for (size_t j = i; j < m_noOfReservations; j++) {
-               m_reservation[j] = m_reservation[j + 1];
+               m_reservation[j] = m_reservation[j + 1]; // invalid read error
             }
 
             //m_reservation[m_noOfReservations] = nullptr;
