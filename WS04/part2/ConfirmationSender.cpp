@@ -104,10 +104,10 @@ namespace sdds
       {
          if (m_reservation[i] == &res)
          {
-            m_reservation[i] == nullptr;
-           /* for (size_t j = i; j < m_noOfReservations; j++) {
+            m_reservation[i] = nullptr;
+            for (size_t j = i; j < m_noOfReservations; j++) {
                m_reservation[j] = m_reservation[j + 1];
-            }*/
+            }
 
             //m_reservation[m_noOfReservations] = nullptr;
             m_noOfReservations--; // counter variable 
