@@ -106,8 +106,8 @@ namespace sdds
       }
 
       const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; //4
-      int i = 0;
-      int j = 0;
+      size_t i = 0;
+      size_t j = 0;
       while (i < m_noOfReservations) { // i < 4; 
          if (i != index) {
             temp[j] = m_reservation[i];
