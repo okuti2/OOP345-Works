@@ -63,20 +63,9 @@ namespace sdds
       if (this != &res)
       {
          m_noOfReservations = res.m_noOfReservations;
-
-         /*for (auto i = 0u; i < m_noOfReservations; i++)
-         {
-             delete m_reservation[i]; corrected memory leak by removing this part-using a single deletion rather than a loop+ that
-         }*/
          delete[] m_reservation;
          m_reservation = res.m_reservation;
 
-         /* m_reservation = new const Reservation *[m_noOfReservations]; // leak
-
-          for (size_t i = 0u; i < m_noOfReservations; i++) corrected memory leak by removing this part - dynamically allocating and assigning to source with loop created memory that was not used and consequently not freed
-          {
-              m_reservation[i] = new Resrvation(*res.m_reservation[i]); // leak
-          }*/
          res.m_noOfReservations = 0;
          res.m_reservation = nullptr;
       }

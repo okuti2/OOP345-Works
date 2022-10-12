@@ -38,7 +38,6 @@ namespace sdds
 
          for (size_t i = 0u; i < m_noOfReservations; i++)
          {
-            //m_reservation[i] = new const Reservation(*src.m_reservation[i]);
             m_reservation[i] = src.m_reservation[i];
          }
       }
@@ -56,19 +55,8 @@ namespace sdds
       {
          m_noOfReservations = src.m_noOfReservations;
 
-         /*for (auto i = 0u; i < m_noOfReservations; i++)
-         {
-             delete m_reservation[i]; corrected memory leak by removing this part-using a single deletion rather than a loop+ that
-         }*/
          delete[] m_reservation;
          m_reservation = src.m_reservation;
-
-         /* m_reservation = new const Reservation *[m_noOfReservations]; // leak
-
-          for (size_t i = 0u; i < m_noOfReservations; i++) corrected memory leak by removing this part - dynamically allocating and assigning to source with loop created memory that was not used and consequently not freed
-          {
-              m_reservation[i] = new Resrvation(*res.m_reservation[i]); // leak
-          }*/
          src.m_noOfReservations = 0;
          src.m_reservation = nullptr;
       }
@@ -102,13 +90,13 @@ namespace sdds
       size_t index = 0u;
       for (size_t i = 0u; i < m_noOfReservations; i++)
       {
-         if (m_reservation[i] == &res) index = i; // 1
+         if (m_reservation[i] == &res) index = i; 
       }
 
-      const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; //4
+      const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; 
       size_t i = 0;
       size_t j = 0;
-      while (i < m_noOfReservations) { // i < 4; 
+      while (i < m_noOfReservations) { 
          if (i != index) {
             temp[j] = m_reservation[i];
             j++;
