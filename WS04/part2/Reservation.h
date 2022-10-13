@@ -28,10 +28,10 @@ namespace sdds
 
    public:
       Reservation();
-      void update(int day, int time);
+      auto update(int day, int time)-> void;
       Reservation(const std::string& res);
-      void trim(std::string& str) const;
-      friend std::ostream& operator<<(std::ostream& ostr, const Reservation& res);
+      auto trim(std::string& str) const-> void;
+      friend auto operator<<(std::ostream& ostr, const Reservation& res)->std::ostream&;
    };
 
 }

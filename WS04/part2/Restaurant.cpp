@@ -35,7 +35,7 @@ namespace sdds
    }
 
    // copy assignment
-   Restaurant& Restaurant::operator=(const Restaurant& res) {
+   auto Restaurant::operator=(const Restaurant& res)-> Restaurant& {
       if (this != &res) {
          for (size_t i = 0u; i < m_noOfReservations; i++) {
             delete m_reservation[i];
@@ -59,7 +59,7 @@ namespace sdds
    }
 
    // move assignment
-   Restaurant& Restaurant::operator=(Restaurant&& res) noexcept {
+   auto Restaurant::operator=(Restaurant&& res) noexcept-> Restaurant& {
       if (this != &res)
       {
          m_noOfReservations = res.m_noOfReservations;
@@ -79,11 +79,11 @@ namespace sdds
       delete[] m_reservation;
    }
 
-   size_t Restaurant::size() {
+   auto Restaurant::size()-> size_t {
       return m_noOfReservations;
    }
 
-   std::ostream& operator << (std::ostream& ostr, const Restaurant& res) {
+   auto operator << (std::ostream& ostr, const Restaurant& res)-> std::ostream& {
       static int count = 0;
       ostr << "--------------------------" << std::endl;
       ostr << "Fancy Restaurant (" << ++count << ")" << std::endl;

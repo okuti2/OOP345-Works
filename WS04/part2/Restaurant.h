@@ -26,12 +26,12 @@ namespace sdds
       Restaurant();
       Restaurant(const Reservation* reservations[], size_t cnt);
       Restaurant(const Restaurant& res); // copy constructor
-      Restaurant& operator=(const Restaurant& res); // copy assignment
+      auto operator=(const Restaurant& res)->Restaurant&; // copy assignment
       Restaurant(Restaurant&& res) noexcept;// move constructor
-      Restaurant& operator=(Restaurant&& src) noexcept;// move assignment operator
+      auto operator=(Restaurant&& src) noexcept-> Restaurant&;// move assignment operator
       ~Restaurant();
-      size_t size();
-      friend std::ostream& operator << (std::ostream& ostr, const Restaurant& res);
+      auto size()->size_t;
+      friend auto operator << (std::ostream& ostr, const Restaurant& res)->std::ostream&;
    };
 
 }

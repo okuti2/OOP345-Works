@@ -25,13 +25,13 @@ namespace sdds
    public:
       ConfirmationSender();
       ConfirmationSender(const ConfirmationSender& src); // copy constructor
-      ConfirmationSender& operator=(const ConfirmationSender& src); // copy assignment
+      auto operator=(const ConfirmationSender& src)->ConfirmationSender&; // copy assignment
       ConfirmationSender(ConfirmationSender&& src) noexcept; // move constructor
-      ConfirmationSender& operator=(ConfirmationSender&& src) noexcept; //move assignment
-      ConfirmationSender& operator+=(const Reservation& res); 
-      ConfirmationSender& operator-=(const Reservation& res);
+      auto operator=(ConfirmationSender&& src) noexcept->ConfirmationSender&; //move assignment
+      auto operator+=(const Reservation& res) ->ConfirmationSender&;
+      auto operator-=(const Reservation& res)->ConfirmationSender&;
       ~ConfirmationSender(); // destructor
-      friend std::ostream& operator <<(std::ostream& ostr, const ConfirmationSender& src);
+      friend auto operator <<(std::ostream& ostr, const ConfirmationSender& src)-> std::ostream&;
    };
 
 }

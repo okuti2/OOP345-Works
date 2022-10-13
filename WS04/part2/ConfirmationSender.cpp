@@ -26,7 +26,7 @@ namespace sdds
    }
 
    // copy assignment
-   ConfirmationSender& ConfirmationSender::operator=(const ConfirmationSender& src) {
+   auto ConfirmationSender::operator=(const ConfirmationSender& src)-> ConfirmationSender& {
       if (this != &src) {
          for (size_t i = 0u; i < m_noOfReservations; i++) {
             delete m_reservation[i];
@@ -50,7 +50,7 @@ namespace sdds
    }
 
    //move assignment
-   ConfirmationSender& ConfirmationSender::operator=(ConfirmationSender&& src) noexcept {
+   auto ConfirmationSender::operator=(ConfirmationSender&& src) noexcept  -> ConfirmationSender & {
       if (this != &src)
       {
          m_noOfReservations = src.m_noOfReservations;
@@ -63,7 +63,7 @@ namespace sdds
       return *this;
    }
 
-   ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res) {
+   auto ConfirmationSender::operator+=(const Reservation& res)-> ConfirmationSender& {
       bool isCopy = false;
       for (size_t i = 0u; i < m_noOfReservations && !isCopy; i++) {
          if (m_reservation[i] == &res) isCopy = true;
@@ -86,26 +86,32 @@ namespace sdds
       return *this;
    }
 
-   ConfirmationSender& ConfirmationSender::operator-=(const Reservation& res) {
+   auto ConfirmationSender::operator-=(const Reservation& res)->ConfirmationSender& {
       size_t index = 0u;
-      for (size_t i = 0u; i < m_noOfReservations; i++)
+      bool found = false;
+      for (size_t i = 0u; i < m_noOfReservations && !found; i++) // find the index of the object in the array that we need to remove
       {
-         if (m_reservation[i] == &res) index = i; 
+         if (m_reservation[i] == &res) {
+            index = i; 
+            found = true;
+         }
       }
 
-      const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; 
-      size_t i = 0;
-      size_t j = 0;
-      while (i < m_noOfReservations) { 
-         if (i != index) {
-            temp[j] = m_reservation[i];
-            j++;
+      if (found) {
+         const Reservation** temp = new const Reservation * [m_noOfReservations - 1]; // temp ConfirmationSender object to add all instances except res
+         size_t i = 0;
+         size_t j = 0;
+         while (i < m_noOfReservations) {
+            if (i != index) {
+               temp[j] = m_reservation[i];
+               j++;
+            }
+            i++;
          }
-         i++;
+         delete[] m_reservation;
+         m_reservation = temp;
+         m_noOfReservations--;
       }
-      delete[] m_reservation;
-      m_reservation = temp;
-      m_noOfReservations--;
       return *this;
    }
 
@@ -116,7 +122,7 @@ namespace sdds
       m_reservation = nullptr;
    }
 
-   std::ostream& operator <<(std::ostream& ostr, const ConfirmationSender& src) {
+   auto operator <<(std::ostream& ostr, const ConfirmationSender& src)->std::ostream& {
       ostr << "--------------------------" << std::endl;
       ostr << "Confirmations to Send" << std::endl;
       ostr << "--------------------------" << std::endl;

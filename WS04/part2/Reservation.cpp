@@ -24,7 +24,7 @@ namespace sdds
       m_time = 0;
    }
 
-   void Reservation::update(int day, int time) {
+    auto Reservation::update(int day, int time)-> void {
       m_day = day;
       m_time = time;
    }
@@ -55,12 +55,12 @@ namespace sdds
       m_time = stoi(res.substr(startPos, endPos));
    }
 
-   void Reservation::trim(std::string& str) const {
+   auto  Reservation::trim(std::string& str) const-> void {
       str.erase(str.find_last_not_of(' ') + 1);
       str.erase(0, str.find_first_not_of(' '));
    }
 
-   std::ostream& operator<<(std::ostream& ostr, const Reservation& res) {
+   auto operator<<(std::ostream& ostr, const Reservation& res)-> std::ostream& {
       ostr << "Reservation ";
       ostr << std::right << std::setw(10) << res.m_reservationId << ":";
       ostr << std::right << std::setw(21) << res.m_name << "  ";
