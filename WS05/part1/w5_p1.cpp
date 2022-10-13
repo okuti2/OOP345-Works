@@ -103,7 +103,7 @@ int main(int argc, char** argv)
 		if (bk.country() == "US") {
 			bk.price() *= usdToCadRate;
 		}
-		else if (bk.country() == "UK" && (bk.year() >= 1990 || bk.year() <= 1999)) {
+		else if (bk.country() == "UK" && (bk.year() >= 1990 && bk.year() <= 1999)) {
 			bk.price() *= gbpToCadRate;
 		}
 	};
