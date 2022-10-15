@@ -36,34 +36,13 @@ int main(int argc, char** argv)
 		//       - lines that start with "#" are considered comments and should be ignored
 		//       - if the file cannot be open, print a message to standard error console and
 		//                exit from application with error code "AppErrors::CannotOpenFile"
-		std::ifstream file(argv[1]); // loading the file 
+		std::ifstream file(argv[1]); // loading the file  // GOT THIS CODE FROM WORKSHOP 4 PART 2
 		if (!file) {
 			std::cerr << "ERROR: Cannot open file.\n";
 			exit(AppErrors::CannotOpenFile);
 		}
 
 		std::string bookline;
-		// count how many records are in the file
-		do
-		{
-			std::getline(file, bookline);
-
-			// if the previous operation failed, the "file" object is
-			//   in error mode
-			if (file)
-			{
-				// Check if this is a commented line.
-				//   In the input file, commented lines start with '#'
-				if (bookline[0] != '#')
-					++counter;
-			}
-		} while (file);
-
-		counter = 0;
-
-		// read again from the file, but this time load and store data
-		file.clear();
-		file.seekg(std::ios::beg);
 		do
 		{
 			std::getline(file, bookline);
