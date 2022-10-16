@@ -62,7 +62,7 @@ namespace sdds
 
    auto SpellChecker::showStatistics(std::ostream& out) const -> void {
                   //BAD_WORD: CNT replacements<endl>
-      out << "SpellChecker Statistics" << std::endl;
+      out << "Spellchecker Statistics" << std::endl;
       for (size_t i = 0; i < m_count; i++) {
          out << std::right << std::setw(15) << m_badWords[i];
          out<< ": " << m_corrections[i] << " replacements" << std::endl;
