@@ -90,7 +90,7 @@ namespace sdds
    template <typename T>
    auto Collection<T>::operator[](size_t idx) const->T& { // returns the item at index idx
       if (idx >= m_size) {
-         throw std::out_of_range("Bad Index [" + std::to_string(idx) + "]. Collection has [" + std::to_string(m_size) + "] items.");
+         throw std::out_of_range("Bad index [" + std::to_string(idx) + "]. Collection has [" + std::to_string(m_size) + "] items.");
          /*OR
          std::string errMess = "Bad Index [" + std::to_string(idx) + "]. Collection has [" + std::to_string(m_size) + "] items.";
          throw std::out_of_range(errMess); */
