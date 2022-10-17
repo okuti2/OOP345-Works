@@ -21,7 +21,7 @@ namespace sdds
       std::string m_author;
       std::string m_title;
       std::string m_countryOfPub;
-      unsigned m_year;
+      size_t m_year;
       double m_price;
       std::string m_description;
 

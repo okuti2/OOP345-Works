@@ -19,7 +19,7 @@ namespace sdds
    class Movie
    {
       std::string m_title;
-      unsigned m_year;
+      size_t m_year;
       std::string m_desc;
    public:
       Movie(); // default ocnstructor
