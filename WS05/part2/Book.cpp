@@ -4,7 +4,7 @@ Module: ConfirmationSender
 Filename: ConfirmationSender.cpp
 Version 1
 Author:	Olutoyosi Kuti; 102633211; okuti2@myseneca.ca
-I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+line 70-73 was taken from my trim function in workshop 4 part 2
 -----------------------------------------------------------
 Date    12th October, 2022
 -----------------------------------------------------------*/
@@ -43,7 +43,7 @@ namespace sdds
 
    Book::Book(const std::string& strBook) { // extracts the data from a long string and stores each substring into its related member variable in the object. I used this function in ws 4 
       size_t startPos = 0;
-      size_t endPos = strBook.find(',');
+      size_t endPos = strBook.find(','); // gets the position in strBook where the first , is
       this->trim(m_author = strBook.substr(startPos, endPos));
 
       startPos = endPos + 1;

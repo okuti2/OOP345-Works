@@ -25,16 +25,16 @@ namespace sdds
          throw errMes; // when it is caught it will be a const char* msg 
       }
       else {
-         std::string line;
+         std::string line; // holds each line from the filename 
          
          while (std::getline(fs, line)) {
             size_t startPos = 0;
             size_t endPos = line.find(' ');
-            trim(m_badWords[counter] = line.substr(startPos, endPos));
+            trim(m_badWords[counter] = line.substr(startPos, endPos)); // takes out the bad word from the line 
 
             startPos = endPos + 1;
             endPos = line.find('\n', startPos);
-            trim(m_goodWords[counter] = line.substr(startPos, endPos - startPos));
+            trim(m_goodWords[counter] = line.substr(startPos, endPos - startPos)); // takes out the good word from line
 
             ++counter;
          }
@@ -47,21 +47,19 @@ namespace sdds
       str.erase(0, str.find_first_not_of(' '));
    }
 
-   auto SpellChecker::operator()(std::string& text)-> void {
+   auto SpellChecker::operator()(std::string& text)-> void { // this is the function that makes it a functor
       for (size_t i = 0; i < m_count; i++) {
-        // m_corrections[i] = 0;
          size_t startPos = text.find(m_badWords[i]);
          size_t length = m_badWords[i].length();
-         while (startPos != std::string::npos) {
+         while (startPos != std::string::npos) { // while the position of the word is not at the end of the string 
             text.replace(startPos, length, m_goodWords[i]);
             startPos = text.find(m_badWords[i], startPos + 1);
-            m_corrections[i]++;
+            m_corrections[i]++; // stores how many times each bad word is replaced with a good word
          }
       }
    }
 
    auto SpellChecker::showStatistics(std::ostream& out) const -> void {
-                  //BAD_WORD: CNT replacements<endl>
       out << "Spellchecker Statistics" << std::endl;
       for (size_t i = 0; i < m_count; i++) {
          out << std::right << std::setw(15) << m_badWords[i];

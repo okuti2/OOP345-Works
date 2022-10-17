@@ -77,9 +77,6 @@ int main(int argc, char** argv)
 				}
 			} while (fs && library.size() < 4);
 		}
-
-
-
 		/*
 		 ♪ Hey, I just met you,      ♪
 		 ♪ And this is crazy,        ♪

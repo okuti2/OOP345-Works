@@ -4,7 +4,7 @@ Module: Movie
 Filename: Movie.cpp
 Version 1
 Author:	Olutoyosi Kuti; 102633211; okuti2@myseneca.ca
-I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+line 45-48 was taken from my trim function in workshop 4 part 2
 -----------------------------------------------------------
 Date    14th October, 2022
 -----------------------------------------------------------*/

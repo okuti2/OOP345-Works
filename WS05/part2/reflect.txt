@@ -3,12 +3,28 @@ Student Number: 102633211
 Seneca Email Address: okuti2@myseneca.ca
 Section Information Code: NCC
 
-the difference between the implementations/utilizations of a functor and a lambda expression. When is appropriate to use each one?
+In this workshop I learned about error handling, lambda expressions, function pointers, template classes, function objects and functors. I had issues with learning how to implement the lambda expressions, understanding the difference between function pointers m_observer in the Collection module, and functors (SpellChecker) module. Before reading the website, I had thought a functor was a function pointer. I also had trouble figuring out a method to count how many times a misspelled word was replaced, I ended up using a static integer array that would count for each iteration how many times a bad wors was replaced with a good word. I utilized the trim function from workshop 4 part 2 in my parametrized constructor for both the Movie and Book modules. I also used the logic from w4_p2.cpp to read the file from the command line and check for commented line before adding into the object. 
 
-the constructor for SpellChecker generates an exception in certain conditions. How would you change your code to achieve the same result, but without exceptions (both on the constructor and on the client side)? Compare the two solutions.
+Lamba expressions are used for simple logic that is only required locally, function pointers are used for more complex logic that does not depend on anything but function parameters and function objects are for more complex logic that needs to maintain specific states
 
-the classes Movie and Book contain almost identical logic in loading data from the file. How would you redesign the classes in order not to duplicate that logic?
+Function objects (Functors) are used to performs the same operation in several different parts of an application with different states. A functor is a class of which function objects are instantiated while a function object is an instance of a functor. They are used when you want to maintain specific states.
+Our Functor is the SpellChecker module. It becomes a functor by overloading function call operator () to replace the m_badWords in the string passed in with m_goodWords. The function object is passed in the fixSpelling templated function in both the Movie and Book module. Both function objects are passed a parameter of type T which in this case would be the object SpellChecker and because the function call operator was overloaded for this object then using the object calls the function for the description of the book and the title and description of the movie. Since these are templated functions, they are both implemented in the header file of their respective modules. 
 
-the classes Movie and Book are instantiated from the main() function using a custom constructor, but they also contain a default constructor. Is the default constructor necessary? Could you remove it? Justify your answer.
+Lambda expressions are anonymous function objects used for simple logic only required in a local area. They are used only once or very few times. In this workshop we implemented a lambda expression "priceFix" that fixes the price of a book based on the country it was published in. It has only one parameter of a reference to an object of type Book. It is implemented using the form:
+[capture-list] (parameter-declaration-clause) -> optional-return-type {//body}.
+A functor is a class with the ability to act like a function while a lambda expression is just a function.
 
-In this workshop we covered error handling, lambda expressions, function pointers, template classes. 
+Without the use of exceptions in the SpellChecker constructor, in order to achieve the same result, I would set the object to a safe empty state to prevent any modification of the object or any members in it after the constructor is done.
+
+I would create an object that holds the string that needs to be separated, the starting position, the end position and the string that is being separated. I would make a function that does the trimming and substring function and have it overloaded for the different variable types. I would have the Movie and Book classes inherit from it, which allows the classes to utilize the logic without duplicating the logic.
+
+Having a default constructor is a good practice but since the values are being instantiated from the main() function it is not a necessity. Unless the main function is changed and it is not initialized with values at the moment of creation, then having a default constructor do that would be the better practice
+
+
+
+
+
+
+
+
+

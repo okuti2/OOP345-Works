@@ -22,7 +22,7 @@ namespace sdds
       std::string m_name;
       T* m_items{};
       size_t m_size;
-      void (*m_observer)(const Collection<T>&, const T&); // functor 
+      void (*m_observer)(const Collection<T>&, const T&); // function pointer
    public:
       Collection(const std::string& name);
       Collection(const Collection& src) = delete;
@@ -40,11 +40,10 @@ namespace sdds
       auto operator+=(const T& item)->Collection<T>&;
       auto operator[](size_t idx) const->T&;
       auto operator[](const std::string& title) const->T*;
-      //friend auto operator << (std::ostream& ostr, const Collection<T>& col)->std::ostream&;
    };
 
    template <typename T>
-   Collection<T>::Collection(const std::string& name) {
+   Collection<T>::Collection(const std::string& name) { // stores the argument passed as the m_name
       m_name = name;
       m_items = nullptr;
       m_observer = nullptr;
@@ -103,7 +102,7 @@ namespace sdds
       T* object = nullptr; // dummy object to hold the object if found or null pointer if not found
       bool found = false;
       for (size_t i = 0; i < m_size && !found; i++) {
-         if (m_items[i].title() == title) {
+         if (m_items[i].title() == title) { // finding the object with the same title
             object = &m_items[i];
             found = true;
          }
@@ -112,7 +111,7 @@ namespace sdds
    }
 
    template <typename T>
-   auto operator << (std::ostream& ostr, const Collection<T>& col)->std::ostream& {
+   auto operator << (std::ostream& ostr, const Collection<T>& col)->std::ostream& { // insertion operator overload
       for (size_t i = 0; i < col.size(); i++) {
          ostr << col[i];
       }

@@ -21,7 +21,7 @@ namespace sdds
       std::string m_author;
       std::string m_title;
       std::string m_countryOfPub;
-      size_t m_year;
+      unsigned m_year;
       double m_price;
       std::string m_description;
 
@@ -31,7 +31,7 @@ namespace sdds
       auto country() const -> const std::string&;
       auto year() const -> const size_t&;
       auto price() -> double&;
-      auto trim(std::string& str) const-> void;
+      auto trim(std::string& str) const-> void; // used in workshop 4 part 2
       Book(const std::string& strBook);
       friend auto operator <<(std::ostream& ostr, const Book& book)->std::ostream&;
       template <typename T>
@@ -39,11 +39,8 @@ namespace sdds
    };
 
    template <typename T>
-   auto Book::fixSpelling(T& spellChecker)-> void {
-      /*auto (*funcPtr)(std::string& text)-> void = operator();
-      funcPtr(spellChecker);*/
-      spellChecker(m_description);
-         
+   auto Book::fixSpelling(T& spellChecker)-> void { // this function is passed the function object of spellChecker because of the overloaded() operator
+      spellChecker(m_description); // this calls the overloaded () operator and replaces all the bad spelling with the correct ones
    }
 }
 #endif

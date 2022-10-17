@@ -25,7 +25,7 @@ namespace sdds
       Movie(); // default ocnstructor
       auto title() const->const std::string&; // query that displays the title 
       Movie(const std::string& strMovie); // parametrized constructor
-      auto trim(std::string& str) const-> void; // remove whitespace from beginning and end 
+      auto trim(std::string& str) const-> void; // remove whitespace from beginning and end .  used in workshop 4 part 2
       template <typename T>
       auto fixSpelling(T& spellChecker)-> void;
       friend auto operator <<(std::ostream& ostr, const Movie& movie)->std::ostream&;
@@ -33,8 +33,8 @@ namespace sdds
    };
 
    template <typename T>
-   auto Movie::fixSpelling(T& spellChecker)-> void {
-      spellChecker(m_title);
+   auto Movie::fixSpelling(T& spellChecker)-> void { // the object being passed is a function object because using that object only calls the overloaded () operator in the class SpellCheker
+      spellChecker(m_title); // calling the overlaoded () operator which replaces all the bad spelling with the right ones
       spellChecker(m_desc);
    }
    
