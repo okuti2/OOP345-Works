@@ -11,6 +11,7 @@ Date    28th October, 2022
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <iomanip>
 #include "Car.h"
 

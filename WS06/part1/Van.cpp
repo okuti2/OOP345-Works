@@ -13,6 +13,7 @@ Date    28th October, 2022
 #include <string>
 #include <iomanip>
 #include<fstream>
+#include <cstring>
 #include "Van.h"
 
 namespace sdds
