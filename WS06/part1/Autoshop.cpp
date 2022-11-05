@@ -26,6 +26,7 @@ namespace sdds
    auto Autoshop::display(std::ostream& out) const -> void {
       for (size_t i = 0; i < m_vehicles.size(); i++) {
          m_vehicles[i]->display(out);
+         delete m_vehicles[i];
       }
    }
 }
