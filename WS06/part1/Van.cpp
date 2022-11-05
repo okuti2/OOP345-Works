@@ -114,8 +114,8 @@ namespace sdds
    }
 
    auto Van::display(std::ostream& out) const -> void {
-      out << "| " << std::setw(8) << m_maker;
-      out << " | " << std::setw(12) << type();
+      out <<std::right<< "| " << std::setw(8) << m_maker;
+      out <<std::left<< " | " << std::setw(12) << type();
       out << " | " << std::setw(12) << usage();
       out << " | " << std::setw(6) << condition();
       out << " | " << std::setw(6) << std::fixed << std::setprecision(2) << m_topSpeed << " |" << std::endl;
