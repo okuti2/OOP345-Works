@@ -7,13 +7,14 @@ In this workshop I learned more about the standard library, Containers and itera
 I also dealt with error handling and the Utilities, Van, Luxuryvan and Car modules all threw errors when given invalid data. I had previously used throw "Invalid record!" for each of them and for the Utilities module I did throw ("Unrecognized record type: [" + type + "]"); which would return it as a string but the others were const char*. Because of this I had to have two situations to catch. I did not like this implementation as I had believed it could be easier. I then decided to use the logic error class derived from the exception class. I stored the messages inside as an invalid_argument. This way I am only catching an exception object and printing out the message.
 
 --QUESTION Why do you need to deallocate the dynamically allocated memory in your vector?
-
+ANSWER:
 Each element in the vector holds the dynamically created object Vehicle which might be a Car, Racecar, Van or Luxuryvan and if they are not properly deallocated it will cause a memory leak in the program.
 
 --QUESTION When building an object from the input file, different things can go wrong: the record represents an unknown type of vehicle, or record contains invalid data. How can the function loadData() detect what went wrong? Can you think at another solution than the one you have implemented?
-The only other solution I can think of was what I did before my current implementation was just to throw the error in the form of a const char* or string and have to catch statements to print the specifc error messages.
+ANSWER:
+The only other solution I can think of was what I did before my current implementation was just to throw the error in the form of a const char* or string and have to catch statements to print the specifc error messages. Another way could be adding a string attribute to all modules called errMessage that would hold an error message if provided. In the constructor if an inva;id argument is passed then errMessage is populated with the exact error that occured. in loadData we would check if the errMessage is not an empty string then it is an invalid object and the error can be printed and the object would not be added.
 
-
---QUESTION In this workshop you had to use std::list<sdds::Vehicle*> and std::vector<sdds::Vehicle*> to store a collection of vehicles as pointers. Could you have used std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> instead?
-
-No
+--QUESTION 
+In this workshop you had to use std::list<sdds::Vehicle*> and std::vector<sdds::Vehicle*> to store a collection of vehicles as pointers. Could you have used std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> instead?
+ANSWER:
+Vehicle is an abstract class (Interface) and we can't create an object of an abstract class but we can use pointers and references to abstract classes. This is why using std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> would not work. Using pointers to Vehicle would actually be pointing to the objects of the derived classes Car, Racecar, Luxuryvan and Van which is what we intend to do. Not using the pointers would cause errors
