@@ -32,7 +32,7 @@ namespace sdds
    auto Luxuryvan::display(std::ostream& out) const->void {
       if (m_consumption == 'e') {
          Van::display(out);
-         out << consumption()<<" *";
+         out <<" "<< consumption() << " *";
       }
       
    }

@@ -131,7 +131,7 @@ namespace sdds
       out <<std::left<< " | " << std::setw(12) << type();
       out << " | " << std::setw(12) << usage();
       out << " | " << std::setw(6) << condition();
-      out << " | " << std::setw(6) << std::fixed << std::setprecision(2) << m_topSpeed << " | ";
+      out << " | " << std::setw(6) << std::fixed << std::setprecision(2) << m_topSpeed << " |";
 
    }
 
