@@ -40,7 +40,8 @@ namespace sdds
          trim(m_maker = maker);
          trim(type);
          if (type != "p" && type != "m" && type != "c") {
-            throw "Invalid record!";
+            //throw "Invalid record!";
+            throw std::invalid_argument("Invalid record!");
          }
          else {
             m_type = type[0];
@@ -48,7 +49,8 @@ namespace sdds
          trim(purpose);
          if (purpose != "d" && purpose != "p" && purpose != "c")
          {
-            throw "Invalid record!";
+            //throw "Invalid record!";
+            throw std::invalid_argument("Invalid record!");
          }
          else {
             m_purpose = purpose[0];
@@ -58,7 +60,8 @@ namespace sdds
             m_condition = 'n';
          }
          else if (condition != "n" && condition != "u" && condition != "b") {
-            throw "Invalid record!";
+            //throw "Invalid record!";
+            throw std::invalid_argument("Invalid record!");
          }
          else {
             m_condition = condition[0];

@@ -31,7 +31,7 @@ namespace sdds
       auto type() const -> std::string;
       auto usage() const->std::string;
       auto trim(std::string& str) const -> void; // trim function from workshop 4 part 2
-      virtual auto display(std::ostream& out) const -> void;
+      auto display(std::ostream& out) const -> void;
 
    };
 }

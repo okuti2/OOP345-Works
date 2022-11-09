@@ -24,8 +24,9 @@ namespace sdds
       std::vector<Vehicle*> m_vehicles;
    public:
       auto operator +=(Vehicle* theVehicle)-> Autoshop&;
-      virtual auto display(std::ostream& out) const -> void;
+      auto display(std::ostream& out) const -> void;
       ~Autoshop();
+
       template <typename T>
       auto select(T test, std::list<const Vehicle*>& vehicles)->void {
          for (auto it = m_vehicles.begin(); it != m_vehicles.end(); ++it)

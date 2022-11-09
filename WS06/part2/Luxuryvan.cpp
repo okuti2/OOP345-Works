@@ -25,7 +25,8 @@ namespace sdds
       m_consumption = consumption[0];
       if (m_consumption == 'g') {
          //throw "Gas consumed van is not luxury";
-         throw "Invalid record!";
+         //throw "Invalid record!";
+         throw std::invalid_argument("Invalid record!");
       }
    }
 

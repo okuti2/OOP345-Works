@@ -22,7 +22,7 @@ namespace sdds
       double m_booster;
    public:
       Racecar(std::istream& in);
-      virtual auto display(std::ostream& out) const -> void;
+      auto display(std::ostream& out) const -> void;
       auto topSpeed() const-> double;
    };
 

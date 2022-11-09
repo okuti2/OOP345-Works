@@ -24,7 +24,7 @@ namespace sdds
       char m_consumption;
    public:
       Luxuryvan(std::istream& in);
-      virtual auto display(std::ostream& out) const->void;
+      auto display(std::ostream& out) const->void;
       auto consumption() const->std::string;
 
    };

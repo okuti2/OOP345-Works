@@ -35,7 +35,8 @@ namespace sdds
          if (condition == "") {
             m_condition = 'n';
          } else if (condition != "n" && condition != "u" && condition != "b") {
-            throw "Invalid record!";
+            //throw "Invalid record!";
+            throw std::invalid_argument("Invalid record!");
          }else{
             m_condition = condition[0];
          }
@@ -44,7 +45,8 @@ namespace sdds
             m_topSpeed = stod(topSpeed);
          }
          else {
-            throw "Invalid record!";
+            //throw "Invalid record!";
+            throw std::invalid_argument("Invalid record!");
          }
 
       }

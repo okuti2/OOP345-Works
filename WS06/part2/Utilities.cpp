@@ -19,42 +19,8 @@ Date    5th November, 2022
 #include "Luxuryvan.h"
 namespace sdds
 {
-   /*auto createInstance(std::istream& in)->Vehicle* {
-		std::string line;
-		Vehicle* result = nullptr;
-		std::getline(in, line);
-		trim(line);
-		char type = line[0];
-		std::stringstream ss(line);
-		if (type == 'c' || type == 'c') {
-			result = new Car(ss);
-		}
-		else if (type == 'v' || type == 'v') {
-			result = new Van(ss);
-		}
-		return result;
-   }*/
-
+   
 	auto createInstance(std::istream& in)->Vehicle* { // without using sstream
-		/*Vehicle* result = nullptr;
-		in >> std::ws;
-		char first = in.peek();
-		if (first == 'c' || first == 'C') {
-			result = new Car(in);	
-		}
-		else if (first == 'v' || first == 'V') {
-			result = new Van(in);
-		}
-		else if (first == 'r' || first == 'R'){
-			result = new Racecar(in);
-		}
-		else if (first == 'l' || first == 'L') {
-			result = new Luxuryvan(in);
-		}
-		else {
-			throw "Unknown Vehicle";
-		}
-		return result;*/
 
 		Vehicle* result = nullptr;
 		std::string line;
@@ -79,8 +45,8 @@ namespace sdds
 				return new Luxuryvan(ss);
 			}
 			else {
-				//throw std::invalid_argument("Unrecognized record type: [" + type + ']');
-				throw ("Unrecognized record type: [" + type + "]");
+				//throw ("Unrecognized record type: [" + type + "]");
+				throw std::invalid_argument("Unrecognized record type: [" + type + "]");
 
 			}
 		}

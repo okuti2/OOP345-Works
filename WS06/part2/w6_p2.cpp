@@ -31,15 +31,9 @@ void loadData(const char* filename, sdds::Autoshop& as)
 			if (aVehicle)
 				as += aVehicle;
 		}
-		catch (const std::string& msg) {
-			std::cout << msg << std::endl;
+		catch (const std::exception& e) {
+			std::cerr << e.what() << std::endl;
 		}
-		catch (const char* msg) {
-			std::cout << msg << std::endl;
-		}
-		/*catch (const std::exception& error) {
-			std::cerr << error.what() << std::endl;
-		}*/
 	}
 }
 

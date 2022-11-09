@@ -26,9 +26,9 @@ namespace sdds
    public:
       Car(std::istream& is); // constructor that stores the tag, maker, condition, topspeed
       auto condition() const->std::string; //returns the condition of the car in full words
-      virtual auto topSpeed() const -> double; // returns the topspeed
+      auto topSpeed() const -> double; // returns the topspeed
       auto trim(std::string& str) const -> void; // trim function from workshop 4 part 2
-     virtual auto display(std::ostream& out) const -> void;
+      auto display(std::ostream& out) const -> void;
       auto isDigit(const std::string& sample)->bool; // checks if the string is a number
 
    };
