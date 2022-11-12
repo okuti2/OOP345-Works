@@ -20,15 +20,15 @@ Date    11th November, 2022
 
 namespace sdds
 {
-   CrimeStatistics::CrimeStatistics(std::string filename) {
+   CrimeStatistics::CrimeStatistics(std::string filename) { // stores the crime Info into the crime structure
       std::ifstream file(filename);
       if (!file) {
          throw std::invalid_argument("ERROR: Cannot open file [" + filename + "].\n");
       }
       else {
-         std::string line;
+         std::string line; // stores the crime Infor directly from the ifstream
          while (std::getline(file, line)) {
-            Crime crime;
+            Crime crime; // temporary object to push into the vector
             std::string year;
             std::string cases;
             std::string resolved;
@@ -48,13 +48,13 @@ namespace sdds
 
    auto CrimeStatistics::display(std::ostream& out) const->void {
 
-      std::for_each(m_crimes.begin(), m_crimes.end(), [=, &out](const Crime& Crime){ out << Crime << std::endl;});
+      std::for_each(m_crimes.begin(), m_crimes.end(), [=, &out](const Crime& Crime){ out << Crime << std::endl;}); // prints all the crime info, calls the << overload operator
 
       auto total_crimes = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [=](const size_t& x, const Crime& crime)
-      { return x + crime.m_numCases; });
+      { return x + crime.m_numCases; }); // adds the total number of cases all together
 
       auto total_resolved = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [=](const size_t& x, const Crime& crime)
-      { return x + crime.m_resolved; });
+      { return x + crime.m_resolved; }); // adds all the number of resolved cases together
 
       out << "----------------------------------------------------------------------------------------" << std::endl;
       out << "| " << std::right<<std::setw(79) << "Total Crimes:  " << total_crimes << " |"
@@ -70,7 +70,7 @@ namespace sdds
 
    auto CrimeStatistics::sort(const std::string fieldName) -> void {
 
-      std::sort(m_crimes.begin(), m_crimes.end(), [=](const Crime& a, const Crime& b) {
+      std::sort(m_crimes.begin(), m_crimes.end(), [=](const Crime& a, const Crime& b) { // sorts the vector based on the feldName parameter passed
          if (fieldName == "Province") {
             return a.m_province < b.m_province;
          }
@@ -89,7 +89,7 @@ namespace sdds
       });
    }
 
-   auto CrimeStatistics::cleanList() -> void {
+   auto CrimeStatistics::cleanList() -> void { // converts "[None]" to ""
 
       std::transform(m_crimes.begin(), m_crimes.end(), m_crimes.begin(), [=](Crime& Crime) { 
          if (Crime.m_crime == "[None]") {
