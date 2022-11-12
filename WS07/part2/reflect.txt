@@ -1,0 +1,16 @@
+Name: Olutoyosi Kuti
+Student ID: 102633211
+Course: OOP 345
+Section: NCC
+Purpose: Workshop 7
+
+In this workshop I learned how to copy data from a file into a sequential container. This was done in the custom constructor that receives the filename as a parameter containing the information detailing the crimes in various districts so they are added to the collection. I had a bit of difficulty in implementing the constructor, I previously tried to extract each token using get() from the ifstream and assign it into each member variable because each token had a specified character size. Using that method proved difficult for me because it was tricky extracting the newline character to move on to the next line of information. Instead I used the getline() function to extract an entire line of information and use the substr function to allocate them into the respective member variables. I stored them all in a temporary object then pushed it into the vector m_crimes.
+
+I also utilized the algorithm library functions to sort data values by the different criteria and to iterate through the <vector> m_crimes. This library was used instead of using manual loops(for and while). In the display function I used the std::for_each() function to print out all the variables in the vector, accumulate to add up all the number of cases and resolved cases. In the sort() function I used the std::sort to sort based on the fieldName passed into the parameter. In the cleanList() function I used the std::transform() function to change "[None]" to "" in each iteration of the vector that has None as the crime type. In the inCollection() function I used the std::any_of() to check if any of the items in the vector match the crime specified in the parameter. Finally I used std::count_if and std::copy_if in getListForProvince() to count the number of crimes that are in the province passed in as the parameter and copy it into a dummy list that is returned.
+
+STL algorithms are less likely to have problems with validation or pointer and reference issues or accidental copying. It also prevents one from having to re-write the same loop over and over again and possibly causing errors, already written functions are less likely to cause such errors. Algorithms also perform faster than formal loops
+
+I would use the string compare function so that minor misspellings can be accepted. If the string compare function gives a result closer to one or if the parameter does not match any of the fields then it will throw an exception. 
+
+
+

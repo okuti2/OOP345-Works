@@ -47,13 +47,14 @@ namespace sdds
    }
 
    auto CrimeStatistics::display(std::ostream& out) const->void {
+
       std::for_each(m_crimes.begin(), m_crimes.end(), [=, &out](const Crime& Crime){ out << Crime << std::endl;});
 
-      auto total_crimes = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [](const size_t& x, const Crime& crime)
-         { return x + crime.m_numCases; });
+      auto total_crimes = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [=](const size_t& x, const Crime& crime)
+      { return x + crime.m_numCases; });
 
-      auto total_resolved = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [](const size_t& x, const Crime& crime)
-         { return x + crime.m_resolved; });
+      auto total_resolved = std::accumulate(m_crimes.begin(), m_crimes.end(), 0u, [=](const size_t& x, const Crime& crime)
+      { return x + crime.m_resolved; });
 
       out << "----------------------------------------------------------------------------------------" << std::endl;
       out << "| " << std::right<<std::setw(79) << "Total Crimes:  " << total_crimes << " |"
@@ -116,18 +117,6 @@ namespace sdds
 
       return FilteredByProvince;
    }
-
-
-
-   /*auto CrimeStatistics::charToString(char* arr)const->std::string {
-      size_t size_arr = strlen(arr);
-      std::string str = "";
-      for (size_t x = 0; x < size_arr; x++) {
-         str = str + arr[x];
-      }
-      trim(str);
-      return str;
-   }*/
 
    std::ostream& operator<<(std::ostream& out, const Crime& theCrime) {
       out << std::left << "| " << std::setw(21) << theCrime.m_province;
