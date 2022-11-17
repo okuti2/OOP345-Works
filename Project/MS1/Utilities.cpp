@@ -24,7 +24,6 @@ namespace sdds
    auto Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more)->std::string {
       size_t end_pos = (str.find(getDelimiter(), next_pos));
       std::string token = str.substr(next_pos, end_pos - next_pos);
-      trim(token);
       if (end_pos == next_pos) // is the delimiter in next_pos
       {
          more = false;
@@ -32,6 +31,7 @@ namespace sdds
       }
       next_pos = end_pos + 1;
       setFieldWidth(std::max(m_widthField, token.size())); // std::max() returns the maximum value of the two
+      trim(token);
       more = (end_pos != std::string::npos); // if it as the end then there is no more 
       return token;
    }
