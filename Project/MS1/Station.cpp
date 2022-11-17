@@ -48,7 +48,7 @@ namespace sdds
 
          os << std::right << std::setfill('0') << std::setw(3) << m_id << " | ";
          os << std::left << std::setfill(' ') << std::setw(m_widthField) << m_name << " | ";
-         os << std::setfill('0') << std::setw(6) << m_nextSerialNum << " | ";
+         os << std::right << std::setfill('0') << std::setw(6) << m_nextSerialNum << " | ";
          if (full) {
             os << std::setfill(' ') << std::setw(4) << m_itemsInStock << " | ";
             os << m_description << std::endl;
