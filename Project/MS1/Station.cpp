@@ -33,7 +33,7 @@ namespace sdds
    }
 
    auto Station::getNextSerialNumber()->size_t {
-      return m_nextSerialNum;
+      return m_nextSerialNum++;
    }
 
    auto Station::getQuantity() const->size_t {
