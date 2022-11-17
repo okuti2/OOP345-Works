@@ -17,7 +17,7 @@ namespace sdds
    size_t Station::m_widthField = 0;
 
    Station::Station(const std::string& str) {
-      m_id = id_generator++;
+      m_id = ++id_generator;
       Utilities utility;
       size_t pos = 0;
       bool more = true;
@@ -46,11 +46,11 @@ namespace sdds
 
    auto Station::display(std::ostream& os, bool full)const -> void {
 
-         os << std::setw(3) << m_id << "|"; 
-         os << std::setw(m_widthField) << m_name << "|";
-         os << std::setw(6) << m_nextSerialNum << "|"; 
+         os << std::setfill('0') << std::setw(3) << m_id << " | ";
+         os << std::left << std::setfill(' ') << std::setw(m_widthField) << m_name << " | ";
+         os << std::setfill('0') << std::setw(6) << m_nextSerialNum << " | ";
          if (full) {
-            os << std::setw(4) << m_itemsInStock << "|";
+            os << std::setfill(' ') << std::setw(4) << m_itemsInStock << " | ";
             os << m_description << std::endl;
          }
          else {
