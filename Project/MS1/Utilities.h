@@ -1,7 +1,7 @@
 // Name: Olutoyosi Kuti
 // Seneca Student ID: 102633211
 // Seneca email: okuti2@myseneca.ca
-// Date of completion:
+// Date of completion: 16th November 2022
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
@@ -15,8 +15,8 @@ namespace sdds
 {
    class Utilities
    {
-      size_t m_widthField = 1;
-      static char m_delimiter;
+      size_t m_widthField = 1; //  length of token extracted
+      static char m_delimiter; //all utilities objects share the same delimiter
    public:
       //Member Functions
       auto setFieldWidth(size_t newWidth) -> void;
@@ -25,7 +25,8 @@ namespace sdds
       //Class Functions
       static auto setDelimiter(char newDelimiter) -> void;
       static auto getDelimiter() -> char;
+
+      auto trim(std::string& str) const -> void;
   };
-   char Utilities::m_delimiter = 0;
 }
 #endif

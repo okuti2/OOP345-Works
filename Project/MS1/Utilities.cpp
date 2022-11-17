@@ -1,7 +1,7 @@
 // Name: Olutoyosi Kuti
 // Seneca Student ID: 102633211
 // Seneca email: okuti2@myseneca.ca
-// Date of completion:
+// Date of completion: 16th November 2022
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
@@ -11,7 +11,8 @@
 
 namespace sdds
 {
-  
+   char Utilities::m_delimiter = 0; // initializing the static variable
+
    auto Utilities::setFieldWidth(size_t newWidth) -> void {
       m_widthField = newWidth;
    }
@@ -21,7 +22,18 @@ namespace sdds
    }
 
    auto Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more)->std::string {
-      // yet to be implemented
+      size_t end_pos = (str.find(getDelimiter(), next_pos));
+      std::string token = str.substr(next_pos, end_pos - next_pos);
+      trim(token);
+      if (end_pos == next_pos) // is the delimiter in next_pos
+      {
+         more = false;
+         throw "error";
+      }
+      next_pos = end_pos + 1;
+      setFieldWidth(std::max(m_widthField, token.size())); // std::max() returns the maximum value of the two
+      more = (end_pos != std::string::npos); // if it as the end then there is no more 
+      return token;
    }
 
    auto Utilities::setDelimiter(char newDelimiter) -> void {
@@ -32,6 +44,9 @@ namespace sdds
       return m_delimiter;
     }
 
-
+   auto Utilities::trim(std::string& str) const -> void {
+      str.erase(str.find_last_not_of(' ') + 1);
+      str.erase(0, str.find_first_not_of(' '));
+   }
 
 }

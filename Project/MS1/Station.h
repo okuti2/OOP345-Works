@@ -1,7 +1,7 @@
 // Name: Olutoyosi Kuti
 // Seneca Student ID: 102633211
 // Seneca email: okuti2@myseneca.ca
-// Date of completion:
+// Date of completion: 16th November 2022
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
@@ -16,11 +16,11 @@ namespace sdds
       int m_id;
       std::string m_name;
       std::string m_description;
-      size_t m_nextSerialNum;
-      size_t m_itemsInStock;
+      unsigned m_nextSerialNum;
+      unsigned m_itemsInStock;
 
-      static size_t m_widthField;
-      static size_t id_generator;
+      static size_t m_widthField; // max num of chars to print to the screen
+      static size_t id_generator; // generates IDs for new instances
    public:
       Station(const std::string& str);
       auto getItemName() const -> const std::string&;
@@ -28,10 +28,8 @@ namespace sdds
       auto getQuantity() const->size_t;
       auto updateQuantity() -> void;
       auto display(std::ostream& os, bool full)const -> void;
-      auto trim(std::string& str) const -> void;
-
-
    };
+   
 
 }
 #endif

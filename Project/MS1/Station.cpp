@@ -1,7 +1,7 @@
 // Name: Olutoyosi Kuti
 // Seneca Student ID: 102633211
 // Seneca email: okuti2@myseneca.ca
-// Date of completion:
+// Date of completion: 16th November 2022
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
@@ -9,11 +9,23 @@
 #include "Station.h"
 #include <iostream>
 #include <iomanip>
+#include "Utilities.h"
 
 namespace sdds
 {
+   size_t Station::id_generator = 0;
+   size_t Station::m_widthField = 0;
+
    Station::Station(const std::string& str) {
-      // yet to be implemented 
+      m_id = id_generator++;
+      Utilities utility;
+      size_t pos = 0;
+      bool more = true;
+      m_name = utility.extractToken(str, pos, more);
+      m_nextSerialNum = stoi(utility.extractToken(str, pos, more));
+      m_itemsInStock = stoi(utility.extractToken(str, pos, more));
+      m_widthField = std::max(m_widthField, utility.getFieldWidth());
+      m_description = utility.extractToken(str, pos, more);
    }
 
    auto Station::getItemName() const -> const std::string& {
@@ -44,10 +56,5 @@ namespace sdds
          else {
             os << std::endl;
          }
-   }
-
-   auto Station::trim(std::string& str) const -> void { 
-      str.erase(str.find_last_not_of(' ') + 1);
-      str.erase(0, str.find_first_not_of(' '));
    }
 }
