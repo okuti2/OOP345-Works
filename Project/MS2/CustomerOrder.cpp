@@ -33,7 +33,7 @@ namespace sdds
 
       while (more) {
          Item** temp = new Item * [m_cntItem + 1];
-         for (size_t i = 0; i < m_cntItem; i++)
+         for (size_t i = 0; i < m_cntItem-1; i++)
          {
             temp[i] = m_lstItem[i];
          }
