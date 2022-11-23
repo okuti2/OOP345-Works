@@ -92,7 +92,7 @@ namespace sdds
 
    auto CustomerOrder::isItemFilled(const std::string& itemName) const->bool {
       bool isFilled = false;
-      int sameName = 0;
+      unsigned sameName = 0;
       unsigned numOfFilled = 0;
       /*std::for_each(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item)
       {
