@@ -20,7 +20,7 @@ namespace sdds
    CustomerOrder::CustomerOrder() {
       m_name = "";
       m_product = "";
-      m_cntItem = 1;
+      m_cntItem = 0;
       m_lstItem = nullptr;
    }
 
@@ -33,7 +33,7 @@ namespace sdds
 
       while (more) {
          Item** temp = new Item * [m_cntItem + 1];
-         for (size_t i = 0; i < m_cntItem-1; i++)
+         for (size_t i = 0; i < m_cntItem; i++)
          {
             temp[i] = m_lstItem[i];
          }
@@ -57,11 +57,11 @@ namespace sdds
    CustomerOrder& CustomerOrder::operator=(CustomerOrder&& src)noexcept {
       if (this != &src)
       {
-            /*   for (auto i = 0u; i < m_cntItem; i++)
-               {
-                  delete m_lstItem[i];
-               }
-               delete[] m_lstItem;*/
+          /*for (auto i = 0u; i < m_cntItem; i++)
+         {
+            delete m_lstItem[i];
+         }
+         delete[] m_lstItem;*/
          m_name = src.m_name;
          m_product = src.m_product;
          m_cntItem = src.m_cntItem;
