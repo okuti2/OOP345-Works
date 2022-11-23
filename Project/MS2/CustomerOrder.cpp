@@ -20,7 +20,7 @@ namespace sdds
    CustomerOrder::CustomerOrder() {
       m_name = "";
       m_product = "";
-      m_cntItem = 0;
+      m_cntItem = 1;
       m_lstItem = nullptr;
    }
 
@@ -33,7 +33,6 @@ namespace sdds
 
       while (more) {
          Item** temp = new Item * [m_cntItem + 1];
-         //std::unique_ptr<Item*> temp (new Item *[m_cntItem + 1]);
          for (size_t i = 0; i < m_cntItem; i++)
          {
             temp[i] = m_lstItem[i];
