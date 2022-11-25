@@ -57,11 +57,12 @@ namespace sdds
    CustomerOrder& CustomerOrder::operator=(CustomerOrder&& src)noexcept {
       if (this != &src)
       {
-          /*for (auto i = 0u; i < m_cntItem; i++)
+         for(auto i = 0u; i < m_cntItem; i++)
          {
             delete m_lstItem[i];
          }
-         delete[] m_lstItem;*/
+         delete[] m_lstItem;
+
          m_name = src.m_name;
          m_product = src.m_product;
          m_cntItem = src.m_cntItem;
@@ -93,6 +94,7 @@ namespace sdds
       bool isFilled = false;
       unsigned sameName = 0;
       unsigned numOfFilled = 0;
+
       /*std::for_each(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item)
       {
             if (item->m_itemName == itemName)
@@ -100,6 +102,7 @@ namespace sdds
                isFilled = item->m_isFilled;
             } });
       return isFilled;*/
+
       sameName = std::count_if(m_lstItem, m_lstItem + 1, [=](const Item* item) {
          return (item->m_itemName == itemName);
       });

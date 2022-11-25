@@ -19,17 +19,17 @@ namespace sdds
    {
       struct Item
       {
-         std::string m_itemName;
+         std::string m_itemName{};
          size_t m_serialNumber{ 0 };
          bool m_isFilled{ false };
 
          Item(const std::string& src) : m_itemName(src) {};
       };
 
-      std::string m_name; // customer name
-      std::string m_product; // name of the product being assembled 
-      size_t m_cntItem; // count of the number of items in the customer's order
-      Item** m_lstItem; // Each element of the array points to a dynamically allocated object of type Item
+      std::string m_name{}; // customer name
+      std::string m_product{}; // name of the product being assembled 
+      size_t m_cntItem = 0; // count of the number of items in the customer's order
+      Item** m_lstItem=nullptr; // Each element of the array points to a dynamically allocated object of type Item
 
       static size_t m_widthField; // the maximum width of a field, used for display purposes
    public:
