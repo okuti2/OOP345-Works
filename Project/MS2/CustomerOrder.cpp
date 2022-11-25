@@ -156,7 +156,7 @@ namespace sdds
       {
          os << "[" << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
          os << std::setw(m_widthField) << std::setfill(' ') << std::left << m_lstItem[i]->m_itemName
-            << "  - ";
+            << " - ";
          if (m_lstItem[i]->m_isFilled)
          {
             os << "FILLED\n";
