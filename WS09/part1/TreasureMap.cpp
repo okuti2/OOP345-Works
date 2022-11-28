@@ -60,22 +60,29 @@ namespace sdds{
             //         then each of the rows of the map.
             //       If the file cannot be open, raise an exception to
             //         inform the client.
-           std::ofstream file(filename, std::ios::out | std::ios::binary);
+           /*std::ofstream file(filename, std::ios::out | std::ios::binary);
            if (file) {
-              file.write((const char*)&rows, sizeof(rows));
-              file.write((const char*)&colSize, sizeof(colSize));
-
-
+              file.write(reinterpret_cast<const char*>(&rows), sizeof(size_t));
+              file.write(reinterpret_cast<const char*>(&colSize), sizeof(size_t));
               for (size_t i = 0; i < rows; i++) {
                 file.write(reinterpret_cast<const char*>(&map[i][0]), colSize);
-             
               }
-              //file.write((char*)map, sizeof(std::string) * colSize);
               file.close();
            }
            else {
               throw std::string("The map is empty!");
+           }*/
+
+           std::ofstream file(filename, std::ios::out | std::ios::binary);
+           if (!file) {
+              throw std::string("File could not be open!");
            }
+           file.write((const char*)&rows, sizeof(size_t));
+           file.write((const char*)&colSize, sizeof(size_t));
+           for (size_t i = 0; i < rows; i++) {
+              file.write((const char*)&map[i][0], colSize);
+           }
+           file.close();
             // END TODO
         }
         else{
@@ -93,20 +100,31 @@ namespace sdds{
         //       Afterwards is each row of the map itself.
         //       If the file cannot be open, raise an exception to inform
         //         the client.
-       std::ifstream file(filename, std::ios::binary);
+       /*std::ifstream file(filename, std::ios::binary);
        if (!file) {
           throw "Bad file!";
        }
-       file.read((char*)&rows, sizeof(int));
-       file.read((char*)&colSize, sizeof(int));
+       file.read(reinterpret_cast<char*>(&rows), sizeof(int));
+       file.read(reinterpret_cast<char*>(&colSize), sizeof(int));
        map = new std::string[rows];
-       //file.read((char*)map, sizeof(std::string)* colSize);
        for (size_t i = 0; i < rows; i++) {
           map[i].resize(colSize);
           file.read(reinterpret_cast<char*>(&map[i][0]), colSize);
        }
-       //file.close();
-         
+       file.close();*/
+
+       std::ifstream file(filename, std::ios::in | std::ios::binary);
+       if (!file) {
+          throw std::string("ERROR: Couldn't open the file!");
+       }
+       file.read((char*)&rows, sizeof(size_t));
+       file.read((char*)&colSize, sizeof(size_t));
+       map = new std::string[rows];
+       for (size_t i = 0; i < rows; i++) {
+          map[i].resize(colSize);
+          file.read((char*)&map[i][0], colSize);
+       }
+       file.close();
         // END TODO
     }
 
