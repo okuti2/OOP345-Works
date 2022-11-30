@@ -126,8 +126,7 @@ namespace sdds
          count += digForTreasure(map[i], mark);
       }*/
 
-      using namespace std::placeholders;
-      auto digTreasure = std::bind(digForTreasure, _1,mark);
+      auto digTreasure = std::bind(digForTreasure, std::placeholders::_1,mark);
       std::packaged_task<size_t(std::string&)>pt(digTreasure);
       std::packaged_task<size_t(std::string&)>pt2(digTreasure);
       std::packaged_task<size_t(std::string&)>pt3(digTreasure);
