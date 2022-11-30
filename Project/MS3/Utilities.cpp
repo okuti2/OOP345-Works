@@ -42,7 +42,7 @@ namespace sdds
 
    auto Utilities::getDelimiter() -> char {
       return m_delimiter;
-    }
+   }
 
    auto Utilities::trim(std::string& str) const -> void {
       str.erase(str.find_last_not_of(' ') + 1);
