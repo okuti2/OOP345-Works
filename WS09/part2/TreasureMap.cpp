@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <functional>
 #include <thread>
 #include <future>
 #include "TreasureMap.h"
