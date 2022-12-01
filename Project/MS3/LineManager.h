@@ -15,8 +15,8 @@ namespace sdds
    class LineManager
    {
       std::vector<Workstation*> m_activeLine;
-      size_t m_cntCustomerOrder;
-      Workstation* m_firstStation;
+      size_t m_cntCustomerOrder = 0;
+      Workstation* m_firstStation{};
    public:
       LineManager(const std::string& file, const std::vector<Workstation*>& stations);
       auto reorderStations()-> void;

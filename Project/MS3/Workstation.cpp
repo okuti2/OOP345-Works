@@ -27,8 +27,8 @@ namespace sdds
 
    auto Workstation::attemptToMoveOrder()-> bool {//attempts to move the order order at the front of the queue to the next station in the assembly line
       bool orderMoved = false;
-    //if (!m_orders.empty()) {
-         if (!m_orders.empty()&&(m_orders.front().isItemFilled(getItemName()) || !getQuantity())) {
+      if (!m_orders.empty()) {
+         if (m_orders.front().isItemFilled(getItemName()) || !getQuantity()) {
             if (m_pNextStation == nullptr) {
                if (m_orders.front().isOrderFilled()) {
                   g_completed.push_back(std::move(m_orders.front()));
@@ -43,7 +43,7 @@ namespace sdds
                orderMoved = true;
             }
          }
-     //}
+      }
       return orderMoved;
    };
 
