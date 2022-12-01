@@ -1,0 +1,15 @@
+Name: Olutoyosi Kuti
+Student ID: 102633211
+Course: OOP 345
+Section: NCC
+Purpose: Workshop 9
+
+In this workshop I learned how to read from binary files as well as write into binary files. Binary files were used to read and write the the map diagram where the search for the treasure takes place. the map was initially retrieved from a text document and stored in the object treasureMap. We then use the enscribe function to to write into the binary file map.dat. Writing into a binary file is different from writing into a text file as it has to be casted to a constant character and the size of the value must be defined because each data added would occupy the speicifed amount of space given. This is important for being able to load the file correctly as you cannot try and find delimiters. 
+Binary file are useful when saving space and data as the do not use as many bytes as text documents
+
+binding a function allows you to associate (or "bind") your own data with a function that you want a library to call, without the library needing to know anything about your data. I used the bind function to reduce the number of arguments needed for the digForTreasure function from 2 to 1 since each packaged task would already receive the same mark variable.
+
+Using multpiple threads improves performance of the program. It makes it run faster and use less servers. In order to use multiple threads, I passed in the packaged tasks created with the divided strings. I made four threads tX, tY, tZ and tW; to do this and after executing them they were joined.
+
+Futures holds the to be value for the execution of a packaged task. In the workshop auto f,f2,f3 and f4 hold the future value of pt,pt2,pt3,pt4 when they are executed in the threads. to retrieve the value we have to do f.get(). In the threads I execute the packaged tasks and when their done the futures already have the required value.
+     
