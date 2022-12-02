@@ -81,7 +81,7 @@ namespace sdds
 
    auto LineManager::run(std::ostream& os)-> bool {
       static size_t iterationNo = 0;
-      os << "Line Manager Iteration : " << ++iterationNo << std::endl;
+      os << "Line Manager Iteration: " << ++iterationNo << std::endl;
 
       if (!g_pending.empty()) {
          *m_firstStation += std::move(g_pending.front());
