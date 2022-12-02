@@ -125,7 +125,7 @@ namespace sdds
                   filled = true;
                }
                else {
-                  os << std::setw(19) << "Unable to fill" << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+                  os <<std::right<< std::setw(19) << "Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
                }
             }
          }
