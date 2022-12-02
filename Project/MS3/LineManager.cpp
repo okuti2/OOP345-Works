@@ -97,7 +97,6 @@ namespace sdds
       });
 
       return (m_cntCustomerOrder == g_completed.size() + g_incomplete.size());
-
    };
 
    auto LineManager::display(std::ostream& os) const -> void {

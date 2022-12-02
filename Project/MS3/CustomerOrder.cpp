@@ -95,7 +95,7 @@ namespace sdds
       unsigned sameName = 0;
       unsigned numOfFilled = 0;
 
-      sameName = std::count_if(m_lstItem, m_lstItem + 1, [=](const Item* item) {
+      sameName = std::count_if(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item) {
          return (item->m_itemName == itemName);
       });
 
