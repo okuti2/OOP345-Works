@@ -25,11 +25,11 @@ namespace sdds
       }
    };
 
-   auto Workstation::attemptToMoveOrder()-> bool {//attempts to move the order order at the front of the queue to the next station in the assembly line
+   auto Workstation::attemptToMoveOrder()-> bool {//attempts to move the order at the front of the queue to the next station in the assembly line
       bool orderMoved = false;
       if (!m_orders.empty()) {
-         if (m_orders.front().isItemFilled(getItemName()) || !getQuantity()) {
-            if (m_pNextStation == nullptr) {
+         if (m_orders.front().isItemFilled(getItemName())|| !getQuantity()) {
+            if (!m_pNextStation) {
                if (m_orders.front().isOrderFilled()) {
                   g_completed.push_back(std::move(m_orders.front()));
                }
@@ -39,9 +39,9 @@ namespace sdds
             }
             else {
                *m_pNextStation += std::move(m_orders.front());
-               m_orders.pop_front();
-               orderMoved = true;
             }
+             m_orders.pop_front();
+               orderMoved = true;
          }
       }
       return orderMoved;
