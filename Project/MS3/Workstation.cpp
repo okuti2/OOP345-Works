@@ -13,9 +13,9 @@
 
 namespace sdds
 {
-   std::deque<CustomerOrder> g_pending{};
-   std::deque<CustomerOrder> g_completed{};
-   std::deque<CustomerOrder> g_incomplete{};
+   std::deque<CustomerOrder> g_pending{}; //holds the orders to be placed onto the assembly line at the first station.
+   std::deque<CustomerOrder> g_completed{}; //holds the orders that have been removed from the last station and have been completely filled.
+   std::deque<CustomerOrder> g_incomplete{}; //holds the orders that have been removed from the last station and could not be filled completely.
 
    Workstation::Workstation(const std::string& str) : Station(str) {}
 
@@ -28,7 +28,7 @@ namespace sdds
    auto Workstation::attemptToMoveOrder()-> bool {//attempts to move the order at the front of the queue to the next station in the assembly line
       bool orderMoved = false;
       if (!m_orders.empty()) {
-         if (m_orders.front().isItemFilled(getItemName())|| !getQuantity()) {
+         if (m_orders.front().isItemFilled(getItemName())|| !getQuantity()) { // the order has to be filled or empty to move to the next station
             if (!m_pNextStation) {
                if (m_orders.front().isOrderFilled()) {
                   g_completed.push_back(std::move(m_orders.front()));
@@ -40,7 +40,7 @@ namespace sdds
             else {
                *m_pNextStation += std::move(m_orders.front());
             }
-             m_orders.pop_front();
+             m_orders.pop_front(); // should pop regardless of what happened. Did not do this and the program stopped at fillOrders
                orderMoved = true;
          }
       }

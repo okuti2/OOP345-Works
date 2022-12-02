@@ -40,7 +40,7 @@ namespace sdds
       return m_itemsInStock;
    }
 
-   auto Station::updateQuantity() -> void {
+   auto Station::updateQuantity() -> void { // reduces the quantity everytime it is called
       (m_itemsInStock - 1) > 0 ? m_itemsInStock-- : m_itemsInStock = 0;
    }
 

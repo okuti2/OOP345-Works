@@ -16,53 +16,114 @@
 
 namespace sdds
 {
-   LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) {
-      std::ifstream readFile(file);
-      if (readFile)
+  /* LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) {
+      std::ifstream f(file);
+      if (f)
       {
-         while (!readFile.eof())
+         while (!f.eof())
          {
             try
             {
-               size_t next_pos = 0u;
+               size_t pos = 0u;
                bool more = true;
                std::string temp, first = "", next = "";
                Utilities utility;
-               std::getline(readFile, temp);
-               first = utility.extractToken(temp, next_pos, more);
+               std::getline(f, temp);
+               first = utility.extractToken(temp, pos, more);
                if (more)
                {
-                  next = utility.extractToken(temp, next_pos, more);
+                  next = utility.extractToken(temp, pos, more);
                }
 
                std::for_each(stations.begin(), stations.end(), [&](Workstation* ws)
+               {
+                  if (ws->getItemName() == first)
                   {
-                     if (ws->getItemName() == first)
+                     if (next != "")
                      {
-                        if (next != "")
-                        {
-                           auto it = std::find_if(stations.begin(), stations.end(), [&](Workstation* nextStation)
-                              { return nextStation->getItemName() == next; });
-                           ws->setNextStation(*it);
-                        }
-                        else
-                        {
-                           ws->setNextStation();
-                        }
-                        m_activeLine.push_back(ws);
-                     } });
+                        auto it = std::find_if(stations.begin(), stations.end(), [&](Workstation* nextStation)
+                           { return nextStation->getItemName() == next; 
+                        });
+                        ws->setNextStation(*it);
+                     }
+                     else
+                     {
+                        ws->setNextStation();
+                     }
+                     m_activeLine.push_back(ws);
+                  } 
+               });
             }
-            catch (const std::exception& e)
+            catch (const std::exception& err)
             {
-               std::cerr << e.what() << '\n';
+               std::cerr << err.what() << std::endl;
+            }
+         }
+         std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws)
+         {
+            int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ls) {
+               return ws == ls->getNextStation() || ws->getNextStation() == nullptr; 
+            });
+            if (find == 0) {
+               m_firstStation = ws;
+            } 
+         });
+         m_cntCustomerOrder = g_pending.size();
+      }
+   }*/
+
+   LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) {
+      std::ifstream f(file);
+      if (f)
+      {
+         std::string temp;
+         while (std::getline(f, temp))
+         {
+            try
+            {
+               size_t pos = 0u;
+               bool more = true;
+               std::string first = "", next = "";
+               Utilities utility;
+               first = utility.extractToken(temp, pos, more);
+               if (more)
+               {
+                  next = utility.extractToken(temp, pos, more);
+               }
+
+               std::for_each(stations.begin(), stations.end(), [&](Workstation* ws)
+               {
+                  if (ws->getItemName() == first)
+                  {
+                     if (next != "")
+                     {
+                        auto it = std::find_if(stations.begin(), stations.end(), [&](Workstation* nextStation)
+                           { return nextStation->getItemName() == next;
+                           });
+                        ws->setNextStation(*it);
+                     }
+                     else
+                     {
+                        ws->setNextStation();
+                     }
+                     m_activeLine.push_back(ws);
+                  }
+               });
+            }
+            catch (const std::exception& err)
+            {
+               std::cerr << err.what() << std::endl;
             }
          }
          std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws)
             {
-               int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ls) { return ws == ls->getNextStation() || ws->getNextStation() == nullptr; });
+               int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ls) {
+                  return ws == ls->getNextStation() || ws->getNextStation() == nullptr;
+                  });
                if (find == 0) {
                   m_firstStation = ws;
-               } });
+               }
+            });
          m_cntCustomerOrder = g_pending.size();
       }
    }

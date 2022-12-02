@@ -15,7 +15,7 @@ using namespace std;
 
 namespace sdds
 {
-   size_t CustomerOrder::m_widthField = 0u;
+   size_t CustomerOrder::m_widthField = 0u; 
 
    CustomerOrder::CustomerOrder() {
       m_name = "";
@@ -31,8 +31,8 @@ namespace sdds
       m_name = utility.extractToken(str, pos, more);
       m_product = utility.extractToken(str, pos, more);
 
-      while (more) {
-         Item** temp = new Item * [m_cntItem + 1];
+      while (more) { // if the end line is not found
+         Item** temp = new Item * [m_cntItem + 1]; // attempted to use smart pointers but it did not work at all
          for (size_t i = 0; i < m_cntItem; i++)
          {
             temp[i] = m_lstItem[i];
@@ -46,7 +46,7 @@ namespace sdds
       m_widthField = std::max(m_widthField, utility.getFieldWidth());
    }
 
-   CustomerOrder::CustomerOrder(const CustomerOrder& custOrd) {
+   CustomerOrder::CustomerOrder(const CustomerOrder& custOrd) { // canot copy
       throw std::exception();
    }
 
@@ -57,7 +57,7 @@ namespace sdds
    CustomerOrder& CustomerOrder::operator=(CustomerOrder&& src)noexcept {
       if (this != &src)
       {
-         for (auto i = 0u; i < m_cntItem; i++)
+         for (auto i = 0u; i < m_cntItem; i++) // had an error where I could not delete the itemlist without triogerring a read violation. I did not initialize values and set m_lstItem = nullptr
          {
             delete m_lstItem[i];
          }
@@ -95,14 +95,14 @@ namespace sdds
       unsigned sameName = 0;
       unsigned numOfFilled = 0;
 
-      sameName = std::count_if(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item) {
+      sameName = std::count_if(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item) { // checks all the items in the pointer array if their names match the parameter
          return (item->m_itemName == itemName);
       });
 
       if (sameName == 0) {
-         isFilled = true;
+         isFilled = true; 
       } else {
-            std::for_each(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item) {
+            std::for_each(m_lstItem, m_lstItem + m_cntItem, [&](const Item* item) { // counts how many of the itemName in the items are filled
             if (item->m_itemName == itemName && item->m_isFilled) {
                numOfFilled++;
             }
@@ -115,9 +115,9 @@ namespace sdds
    auto CustomerOrder::fillItem(Station& station, std::ostream& os)->void {
       bool filled = false;
       if (m_lstItem != nullptr) {
-         for (size_t i = 0; i < m_cntItem && !filled; i++) {
-            if (m_lstItem[i]->m_itemName == station.getItemName() && (!m_lstItem[i]->m_isFilled)) {
-               if (station.getQuantity() > 0) {
+         for (size_t i = 0; i < m_cntItem && !filled; i++) { // should only fill one item
+            if (m_lstItem[i]->m_itemName == station.getItemName() && (!m_lstItem[i]->m_isFilled)) { // did not check if it was filled before and got horrible errors
+               if (station.getQuantity() > 0) { // canot fill an item that is not in stock 
                   m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
                   m_lstItem[i]->m_isFilled = true;
                   station.updateQuantity();

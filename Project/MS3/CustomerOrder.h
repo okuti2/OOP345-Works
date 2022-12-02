@@ -36,7 +36,7 @@ namespace sdds
       CustomerOrder();
       CustomerOrder(const std::string& str);
       CustomerOrder(const CustomerOrder& custOrd); // copy constructor
-      CustomerOrder& operator=(const CustomerOrder& custOrd) = delete; // copy assignment operator
+      CustomerOrder& operator=(const CustomerOrder& custOrd) = delete; // cannot copy assign
       CustomerOrder(CustomerOrder&& custOrd) noexcept; // move constructor
       CustomerOrder& operator=(CustomerOrder&& custOrd)noexcept; // move assignment operator
       ~CustomerOrder();
