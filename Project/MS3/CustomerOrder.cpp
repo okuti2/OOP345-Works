@@ -116,7 +116,7 @@ namespace sdds
       bool filled = false;
       if (m_lstItem != nullptr) {
          for (size_t i = 0; i < m_cntItem && !filled; i++) {
-            if (m_lstItem[i]->m_itemName == station.getItemName()) {
+            if (m_lstItem[i]->m_itemName == station.getItemName() && (!m_lstItem[i]->m_isFilled)) {
                if (station.getQuantity() > 0) {
                   m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
                   m_lstItem[i]->m_isFilled = true;
@@ -125,7 +125,7 @@ namespace sdds
                   filled = true;
                }
                else {
-                  os << std::setw(19) << "Unable to fill" << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]";
+                  os << std::setw(19) << "Unable to fill" << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
                }
             }
          }
