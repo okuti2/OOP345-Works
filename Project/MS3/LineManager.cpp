@@ -16,62 +16,6 @@
 
 namespace sdds
 {
-  /* LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) {
-      std::ifstream f(file);
-      if (f)
-      {
-         while (!f.eof())
-         {
-            try
-            {
-               size_t pos = 0u;
-               bool more = true;
-               std::string temp, first = "", next = "";
-               Utilities utility;
-               std::getline(f, temp);
-               first = utility.extractToken(temp, pos, more);
-               if (more)
-               {
-                  next = utility.extractToken(temp, pos, more);
-               }
-
-               std::for_each(stations.begin(), stations.end(), [&](Workstation* ws)
-               {
-                  if (ws->getItemName() == first)
-                  {
-                     if (next != "")
-                     {
-                        auto it = std::find_if(stations.begin(), stations.end(), [&](Workstation* nextStation)
-                           { return nextStation->getItemName() == next; 
-                        });
-                        ws->setNextStation(*it);
-                     }
-                     else
-                     {
-                        ws->setNextStation();
-                     }
-                     m_activeLine.push_back(ws);
-                  } 
-               });
-            }
-            catch (const std::exception& err)
-            {
-               std::cerr << err.what() << std::endl;
-            }
-         }
-         std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws)
-         {
-            int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ls) {
-               return ws == ls->getNextStation() || ws->getNextStation() == nullptr; 
-            });
-            if (find == 0) {
-               m_firstStation = ws;
-            } 
-         });
-         m_cntCustomerOrder = g_pending.size();
-      }
-   }*/
-
    LineManager::LineManager(const std::string& file, const std::vector<Workstation*>& stations) {
       std::ifstream f(file);
       if (f)
@@ -95,16 +39,14 @@ namespace sdds
                {
                   if (ws->getItemName() == first)
                   {
-                     if (next != "")
-                     {
+                     if (next == "") {
+                        ws->getNextStation();
+                     }
+                     else {
                         auto it = std::find_if(stations.begin(), stations.end(), [&](Workstation* nextStation)
                            { return nextStation->getItemName() == next;
                            });
                         ws->setNextStation(*it);
-                     }
-                     else
-                     {
-                        ws->setNextStation();
                      }
                      m_activeLine.push_back(ws);
                   }
@@ -115,15 +57,15 @@ namespace sdds
                std::cerr << err.what() << std::endl;
             }
          }
-         std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws)
-            {
-               int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ls) {
-                  return ws == ls->getNextStation() || ws->getNextStation() == nullptr;
-                  });
+         std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws) // used to make sure m_firstStation points to the correct one
+         {
+               int find = std::count_if(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* next) { // if the station ws is found as the next station for any of the stations (next) then it is not the first
+                  return ws == next->getNextStation() || ws->getNextStation() == nullptr;
+               });
                if (find == 0) {
                   m_firstStation = ws;
                }
-            });
+         });
          m_cntCustomerOrder = g_pending.size();
       }
    }
@@ -150,7 +92,7 @@ namespace sdds
       }
 
       for_each(m_activeLine.begin(), m_activeLine.end(), [&os](Workstation* ws) {
-         ws->fill(os); // issue here 
+         ws->fill(os); // issue here
       });
 
       for_each(m_activeLine.begin(), m_activeLine.end(), [](Workstation* ws) {

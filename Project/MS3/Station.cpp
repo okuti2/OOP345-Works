@@ -13,13 +13,13 @@
 
 namespace sdds
 {
-   size_t Station::id_generator = 0;
-   size_t Station::m_widthField = 0;
+   size_t Station::id_generator = 0u;
+   size_t Station::m_widthField = 0u;
 
    Station::Station(const std::string& str) { // custom constructor that extracts all the tokens into the Station variables
       m_id = ++id_generator;
       Utilities utility; // temp utilities object
-      size_t pos = 0;
+      size_t pos = 0u;
       bool more = true;
       m_name = utility.extractToken(str, pos, more);
       m_nextSerialNum = stoi(utility.extractToken(str, pos, more));
@@ -45,7 +45,6 @@ namespace sdds
    }
 
    auto Station::display(std::ostream& os, bool full)const -> void {
-
       os << std::right << std::setfill('0') << std::setw(3) << m_id << " | ";
       os << std::left << std::setfill(' ') << std::setw(m_widthField) << m_name << " | ";
       os << std::right << std::setfill('0') << std::setw(6) << m_nextSerialNum << " | ";

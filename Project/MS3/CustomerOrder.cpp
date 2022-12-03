@@ -20,20 +20,20 @@ namespace sdds
    CustomerOrder::CustomerOrder() {
       m_name = "";
       m_product = "";
-      m_cntItem = 0;
+      m_cntItem = 0u;
       m_lstItem = nullptr;
    }
 
    CustomerOrder::CustomerOrder(const std::string& str) {
       Utilities utility;
-      size_t pos = 0;
+      size_t pos = 0u;
       bool more = true;
       m_name = utility.extractToken(str, pos, more);
       m_product = utility.extractToken(str, pos, more);
 
       while (more) { // if the end line is not found
          Item** temp = new Item * [m_cntItem + 1]; // attempted to use smart pointers but it did not work at all
-         for (size_t i = 0; i < m_cntItem; i++)
+         for (size_t i = 0u; i < m_cntItem; i++)
          {
             temp[i] = m_lstItem[i];
          }
@@ -77,7 +77,7 @@ namespace sdds
    }
 
    CustomerOrder::~CustomerOrder() {
-      for (size_t i = 0; i < m_cntItem; i++) {
+      for (size_t i = 0u; i < m_cntItem; i++) {
          delete m_lstItem[i];
          m_lstItem[i] = nullptr;
       };
@@ -115,7 +115,7 @@ namespace sdds
    auto CustomerOrder::fillItem(Station& station, std::ostream& os)->void {
       bool filled = false;
       if (m_lstItem != nullptr) {
-         for (size_t i = 0; i < m_cntItem && !filled; i++) { // should only fill one item
+         for (size_t i = 0u; i < m_cntItem && !filled; i++) { // should only fill one item
             if (m_lstItem[i]->m_itemName == station.getItemName() && (!m_lstItem[i]->m_isFilled)) { // did not check if it was filled before and got horrible errors
                if (station.getQuantity() > 0) { // canot fill an item that is not in stock 
                   m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
@@ -134,7 +134,7 @@ namespace sdds
 
    auto CustomerOrder::display(std::ostream& os) const -> void {
       os << m_name << " - " << m_product << "\n";
-      for (size_t i = 0; i < m_cntItem; i++)
+      for (size_t i = 0u; i < m_cntItem; i++)
       {
          os << "[" << std::setw(6)<<std::right << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
          os << std::setw(m_widthField) << std::setfill(' ') << std::left << m_lstItem[i]->m_itemName
